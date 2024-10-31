@@ -2,14 +2,22 @@ use pyo3::prelude::*;
 
 pub mod read_delim;
 
-pub mod tail;
-use tail::{tail_string, tail_, tail_string_delim};
+pub mod with_eol;
+use with_eol::WithEOL;
+
+pub mod with_custom_delim;
+use with_custom_delim::WithCustomDelim;
+
+/*
+    We must import here to be acessible everywhere
+*/
+
+pub mod utils;
 
 ////
 #[pymodule]
 fn file_operations_lib(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(tail_string, m)?)?;
-    m.add_function(wrap_pyfunction!(tail_, m)?)?;
-    m.add_function(wrap_pyfunction!(tail_string_delim, m)?)?;
+    m.add_class::<WithEOL>()?;
+    m.add_class::<WithCustomDelim>()?;
     Ok(())
 }
