@@ -1,16 +1,26 @@
 use file_operations_lib::with_eol::WithEOL;
 use std::process::Command;
 
-fn cmp_vector(vec1: Vec<String>, vec2: Vec<String>) -> (){
-    assert_eq!(vec1.len(), vec2.len(), "Not the same len, vec1.len() (ref): \"{}\"; vec2.len() (to test): \"{}\"", vec1.len(), vec2.len());
+fn cmp_vector(vec1: Vec<String>, vec2: Vec<String>) -> () {
+    assert_eq!(
+        vec1.len(),
+        vec2.len(),
+        "Not the same len, vec1.len() (ref): \"{}\"; vec2.len() (to test): \"{}\"",
+        vec1.len(),
+        vec2.len()
+    );
 
     for i in 0..vec1.len() {
-        assert_eq!(vec1[i], vec2[i], "Not the same! i: {}; vec1[i] (ref): \"{}\"; vec2[i] (to test): \"{}\"", i, vec1[i], vec2[i]);
+        assert_eq!(
+            vec1[i], vec2[i],
+            "Not the same! i: {}; vec1[i] (ref): \"{}\"; vec2[i] (to test): \"{}\"",
+            i, vec1[i], vec2[i]
+        );
     }
 }
 
 fn convert_string_to_list(str: String) -> Vec<String> {
-    let mut convert: Vec<String> = str.split('\n').map(|e| e.to_string()).collect();    
+    let mut convert: Vec<String> = str.split('\n').map(|e| e.to_string()).collect();
     if convert.len() == 1 && convert[0] == "".to_string() {
         convert = Vec::new();
     }
@@ -50,8 +60,8 @@ mod tests_with_eol_head {
             Ok(string) => string,
             Err(_e) => panic!("Error convertion"),
         };
-        
-        let head_ref: Vec<String> = convert_string_to_list(head_ref_str);   
+
+        let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
         let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, false);
 
@@ -78,7 +88,7 @@ mod tests_with_eol_head {
             Ok(string) => string,
             Err(_e) => panic!("Error convertion"),
         };
-        
+
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
         let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, false);
@@ -104,7 +114,7 @@ mod tests_with_eol_head {
             Ok(string) => string,
             Err(_e) => panic!("Error convertion"),
         };
-        
+
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
         let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, false);
@@ -131,8 +141,8 @@ mod tests_with_eol_head {
             Ok(string) => string,
             Err(_e) => panic!("Error convertion"),
         };
-        
-        let head_ref: Vec<String> = convert_string_to_list(head_ref_str);   
+
+        let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
         let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, true);
 
@@ -163,7 +173,7 @@ mod tests_with_eol_head {
             Ok(string) => string,
             Err(_e) => panic!("Error convertion"),
         };
-        
+
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
         let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, true);
@@ -189,7 +199,7 @@ mod tests_with_eol_head {
             Ok(string) => string,
             Err(_e) => panic!("Error convertion"),
         };
-        
+
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
         let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, true);

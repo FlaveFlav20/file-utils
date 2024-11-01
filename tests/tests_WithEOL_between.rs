@@ -1,16 +1,26 @@
 use file_operations_lib::with_eol::WithEOL;
 use std::process::Command;
 
-fn cmp_vector(vec1: Vec<String>, vec2: Vec<String>) -> (){
-    assert_eq!(vec1.len(), vec2.len(), "Not the same len, vec1.len() (ref): \"{}\"; vec2.len() (to test): \"{}\"", vec1.len(), vec2.len());
+fn cmp_vector(vec1: Vec<String>, vec2: Vec<String>) -> () {
+    assert_eq!(
+        vec1.len(),
+        vec2.len(),
+        "Not the same len, vec1.len() (ref): \"{}\"; vec2.len() (to test): \"{}\"",
+        vec1.len(),
+        vec2.len()
+    );
 
     for i in 0..vec1.len() {
-        assert_eq!(vec1[i], vec2[i], "Not the same! i: {}; vec1[i] (ref): \"{}\"; vec2[i] (to test): \"{}\"", i, vec1[i], vec2[i]);
+        assert_eq!(
+            vec1[i], vec2[i],
+            "Not the same! i: {}; vec1[i] (ref): \"{}\"; vec2[i] (to test): \"{}\"",
+            i, vec1[i], vec2[i]
+        );
     }
 }
 
 fn convert_string_to_list(str: String) -> Vec<String> {
-    let mut convert: Vec<String> = str.split('\n').map(|e| e.to_string()).collect();    
+    let mut convert: Vec<String> = str.split('\n').map(|e| e.to_string()).collect();
     if convert.len() == 1 && convert[0] == "".to_string() {
         convert = Vec::new();
     }
@@ -42,7 +52,14 @@ mod tests_with_eol_between {
         } else {
             Command::new("sh")
                 .arg("-c")
-                .arg("sed -n '".to_string() + &n1.to_string() + "," + &n2.to_string() + " p' " + PATH)
+                .arg(
+                    "sed -n '".to_string()
+                        + &n1.to_string()
+                        + ","
+                        + &n2.to_string()
+                        + " p' "
+                        + PATH,
+                )
                 .output()
                 .expect("failed to execute process")
         };
@@ -51,9 +68,9 @@ mod tests_with_eol_between {
             Ok(string) => string,
             Err(_e) => panic!("Error convertion"),
         };
-        
-        let between_ref: Vec<String> = convert_string_to_list(between_ref_str);   
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(),n1,n2, false);
+
+        let between_ref: Vec<String> = convert_string_to_list(between_ref_str);
+        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, false);
 
         cmp_vector(between_ref, check_between);
     }
@@ -70,7 +87,14 @@ mod tests_with_eol_between {
         } else {
             Command::new("sh")
                 .arg("-c")
-                .arg("sed -n '".to_string() + &n1.to_string() + "," + &n2.to_string() + " p' " + PATH)
+                .arg(
+                    "sed -n '".to_string()
+                        + &n1.to_string()
+                        + ","
+                        + &n2.to_string()
+                        + " p' "
+                        + PATH,
+                )
                 .output()
                 .expect("failed to execute process")
         };
@@ -85,13 +109,13 @@ mod tests_with_eol_between {
 
         cmp_vector(between_ref, check_between);
     }
-    
+
     #[test]
     fn between_n1_5_n2_4_valid_remove_empty_string_false() {
         let n1: usize = 5;
         let n2: usize = 4;
         let between_ref: Vec<String> = Vec::new();
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(),n1,n2, false);
+        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, false);
 
         cmp_vector(between_ref, check_between);
     }
@@ -108,7 +132,15 @@ mod tests_with_eol_between {
         } else {
             Command::new("sh")
                 .arg("-c")
-                .arg("sed '/^$/d' ".to_string() + PATH + " | sed -n '" + &n1.to_string() + "," + &n2.to_string() + " p'")
+                .arg(
+                    "sed '/^$/d' ".to_string()
+                        + PATH
+                        + " | sed -n '"
+                        + &n1.to_string()
+                        + ","
+                        + &n2.to_string()
+                        + " p'",
+                )
                 .output()
                 .expect("failed to execute process")
         };
@@ -117,9 +149,9 @@ mod tests_with_eol_between {
             Ok(string) => string,
             Err(_e) => panic!("Error convertion"),
         };
-        
-        let between_ref: Vec<String> = convert_string_to_list(between_ref_str);   
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(),n1,n2, true);
+
+        let between_ref: Vec<String> = convert_string_to_list(between_ref_str);
+        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, true);
 
         cmp_vector(between_ref, check_between);
     }
@@ -136,7 +168,15 @@ mod tests_with_eol_between {
         } else {
             Command::new("sh")
                 .arg("-c")
-                .arg("sed '/^$/d' ".to_string() + PATH + " | sed -n '" + &n1.to_string() + "," + &n2.to_string() + " p'")
+                .arg(
+                    "sed '/^$/d' ".to_string()
+                        + PATH
+                        + " | sed -n '"
+                        + &n1.to_string()
+                        + ","
+                        + &n2.to_string()
+                        + " p'",
+                )
                 .output()
                 .expect("failed to execute process")
         };
@@ -145,10 +185,10 @@ mod tests_with_eol_between {
             Ok(string) => string,
             Err(_e) => panic!("Error convertion"),
         };
-        
+
         let between_ref: Vec<String> = convert_string_to_list(between_ref_str);
 
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(),n1,n2, true);
+        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, true);
         cmp_vector(between_ref, check_between);
     }
     #[test]
@@ -156,7 +196,7 @@ mod tests_with_eol_between {
         let n1: usize = 5;
         let n2: usize = 4;
         let between_ref: Vec<String> = Vec::new();
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(),n1,n2, true);
+        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, true);
         cmp_vector(between_ref, check_between);
     }
 }

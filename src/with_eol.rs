@@ -18,7 +18,7 @@ impl WithEOL {
         if n == 0 {
             return result;
         }
-        
+
         for line in read_to_string(file).unwrap().lines() {
             if remove_empty_string && line.to_string().is_empty() {
                 continue;
@@ -43,8 +43,7 @@ impl WithEOL {
             }
             if counter > n2 {
                 break;
-            }
-            else if counter >= n1 {
+            } else if counter >= n1 {
                 result.push(line.to_string());
             }
             counter += 1;
@@ -61,7 +60,6 @@ impl WithEOL {
             return convert_queue_to_vec(result);
         }
 
-    
         for line in read_to_string(file).unwrap().lines() {
             if remove_empty_string && line.to_string().trim().is_empty() {
                 continue;
@@ -71,7 +69,7 @@ impl WithEOL {
             }
             result.push_back(line.to_string());
         }
-    
+
         convert_queue_to_vec(result)
     }
 
@@ -84,8 +82,8 @@ impl WithEOL {
             if remove_empty_string && line.to_string().is_empty() {
                 continue;
             }
-            res+=1;
+            res += 1;
         }
-       res
+        res
     }
 }

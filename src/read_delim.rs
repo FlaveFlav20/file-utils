@@ -1,11 +1,11 @@
-use std::io::prelude::*;
 use std::fs::File;
+use std::io::prelude::*;
 
 pub struct ReadDelimiter {
     pub _filename: String,
     pub file: File,
     pub delimiter: Vec<String>,
-    pub line: String, 
+    pub line: String,
     buffer: Vec<u8>,
     index_buffer: usize,
     curr_index: usize,
@@ -13,13 +13,16 @@ pub struct ReadDelimiter {
 }
 
 /*
-    ReadDelimiter: 
+    ReadDelimiter:
         - Goal: Create a structure to read a file delim by delim (like line by line)
 */
 
 impl ReadDelimiter {
-
-    pub fn new(filename: String, delimiter: Vec<String>, buffer_size: usize) -> Result<ReadDelimiter, std::io::Error>{
+    pub fn new(
+        filename: String,
+        delimiter: Vec<String>,
+        buffer_size: usize,
+    ) -> Result<ReadDelimiter, std::io::Error> {
         let file = File::open(&filename)?;
         Ok(ReadDelimiter {
             _filename: filename.clone(),
@@ -34,7 +37,6 @@ impl ReadDelimiter {
     }
 
     pub fn read(&mut self) -> Result<bool, std::io::Error> {
-
         self.line = "".to_string();
         let mut buffer: u8 = 0;
         let mut indx: usize = 0;
@@ -51,23 +53,24 @@ impl ReadDelimiter {
                     continue;
                 }
 
-                if self.delimiter[i] == &self.line[((indx - (self.delimiter[i].as_bytes().len() - 1)))..self.line.len()] {
+                if self.delimiter[i]
+                    == &self.line
+                        [(indx - (self.delimiter[i].as_bytes().len() - 1))..self.line.len()]
+                {
                     for _i in 0..self.delimiter[i].as_bytes().len() {
                         self.line.pop();
                     }
                     return Ok(true);
                 }
             }
-            indx+=1;
+            indx += 1;
         }
         Ok(self.line.len() != 0)
     }
 
-    fn read_from_buffer(&mut self, c: &mut u8) -> Result<usize, std::io::Error>{
+    fn read_from_buffer(&mut self, c: &mut u8) -> Result<usize, std::io::Error> {
         self.count += 1;
         if self.curr_index >= self.index_buffer {
-    
-
             let bytes_read = match (self.file).read(&mut self.buffer) {
                 Ok(bytes_read) => bytes_read,
                 Err(_e) => panic!("[ReadDeliiter][read_from_buffer]: Error while reading file"),
@@ -86,5 +89,4 @@ impl ReadDelimiter {
         self.curr_index += 1;
         return Ok(1 as usize);
     }
-
 }
