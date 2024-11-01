@@ -70,7 +70,15 @@ mod tests_with_eol_between {
         };
 
         let between_ref: Vec<String> = convert_string_to_list(between_ref_str);
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, false);
+        let check_between: Vec<String> = WithEOL::between(
+            PATH.to_string(),
+            n1,
+            n2,
+            false,
+            false,
+            false,
+            "".to_string(),
+        );
 
         cmp_vector(between_ref, check_between);
     }
@@ -105,7 +113,15 @@ mod tests_with_eol_between {
         };
 
         let between_ref: Vec<String> = convert_string_to_list(between_ref_str);
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, false);
+        let check_between: Vec<String> = WithEOL::between(
+            PATH.to_string(),
+            n1,
+            n2,
+            false,
+            false,
+            false,
+            "".to_string(),
+        );
 
         cmp_vector(between_ref, check_between);
     }
@@ -115,7 +131,15 @@ mod tests_with_eol_between {
         let n1: usize = 5;
         let n2: usize = 4;
         let between_ref: Vec<String> = Vec::new();
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, false);
+        let check_between: Vec<String> = WithEOL::between(
+            PATH.to_string(),
+            n1,
+            n2,
+            false,
+            false,
+            false,
+            "".to_string(),
+        );
 
         cmp_vector(between_ref, check_between);
     }
@@ -151,7 +175,8 @@ mod tests_with_eol_between {
         };
 
         let between_ref: Vec<String> = convert_string_to_list(between_ref_str);
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, true);
+        let check_between: Vec<String> =
+            WithEOL::between(PATH.to_string(), n1, n2, true, false, false, "".to_string());
 
         cmp_vector(between_ref, check_between);
     }
@@ -188,7 +213,8 @@ mod tests_with_eol_between {
 
         let between_ref: Vec<String> = convert_string_to_list(between_ref_str);
 
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, true);
+        let check_between: Vec<String> =
+            WithEOL::between(PATH.to_string(), n1, n2, true, false, false, "".to_string());
         cmp_vector(between_ref, check_between);
     }
     #[test]
@@ -196,7 +222,8 @@ mod tests_with_eol_between {
         let n1: usize = 5;
         let n2: usize = 4;
         let between_ref: Vec<String> = Vec::new();
-        let check_between: Vec<String> = WithEOL::between(PATH.to_string(), n1, n2, true);
+        let check_between: Vec<String> =
+            WithEOL::between(PATH.to_string(), n1, n2, true, false, false, "".to_string());
         cmp_vector(between_ref, check_between);
     }
 }

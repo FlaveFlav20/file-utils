@@ -63,7 +63,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, false);
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, false, false, false, "".to_string());
 
         cmp_vector(head_ref, check_head);
     }
@@ -91,7 +92,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, false);
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, false, false, false, "".to_string());
         cmp_vector(head_ref, check_head);
     }
     #[test]
@@ -117,7 +119,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, false);
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, false, false, false, "".to_string());
         cmp_vector(head_ref, check_head);
     }
 
@@ -144,7 +147,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, true);
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, true, false, false, "".to_string());
 
         /*for i in 0..head_ref.len() {
             println!("{}$;{}$", head_ref[i], check_head[i]);
@@ -176,7 +180,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, true);
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, true, false, false, "".to_string());
         cmp_vector(head_ref, check_head);
     }
     #[test]
@@ -202,7 +207,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(PATH.to_string(), len, true);
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, true, false, false, "".to_string());
 
         cmp_vector(head_ref, check_head);
     }
