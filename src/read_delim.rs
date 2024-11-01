@@ -6,7 +6,7 @@ pub struct ReadDelimiter {
     pub file: File,
     pub delimiter: Vec<String>,
     pub line: String, 
-    buffer: [u8; 1024],
+    buffer: Vec<u8>,
     index_buffer: usize,
     curr_index: usize,
     count: usize,
@@ -19,14 +19,14 @@ pub struct ReadDelimiter {
 
 impl ReadDelimiter {
 
-    pub fn new(filename: String, delimiter: Vec<String>) -> Result<ReadDelimiter, std::io::Error>{
+    pub fn new(filename: String, delimiter: Vec<String>, buffer_size: usize) -> Result<ReadDelimiter, std::io::Error>{
         let file = File::open(&filename)?;
         Ok(ReadDelimiter {
             _filename: filename.clone(),
             file: file,
             delimiter: delimiter.clone(),
             line: "".to_string(),
-            buffer: [0 as u8; 1024],
+            buffer: vec![0; buffer_size],
             index_buffer: 0,
             curr_index: 0,
             count: 0,
@@ -47,7 +47,7 @@ impl ReadDelimiter {
             self.line += &((buffer as char).to_string());
 
             for i in 0..self.delimiter.len() {
-                if indx == 0 || indx < (self.delimiter[i].as_bytes().len() - 1) {
+                if indx < (self.delimiter[i].as_bytes().len() - 1) {
                     continue;
                 }
 
@@ -67,7 +67,6 @@ impl ReadDelimiter {
         self.count += 1;
         if self.curr_index >= self.index_buffer {
     
-            self.buffer = [0 as u8; 1024];
 
             let bytes_read = match (self.file).read(&mut self.buffer) {
                 Ok(bytes_read) => bytes_read,
