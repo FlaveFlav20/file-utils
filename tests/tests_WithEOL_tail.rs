@@ -56,8 +56,15 @@ mod tests_with_eol_tail {
 
         let tail_ref: Vec<String> = convert_string_to_list(tail_ref_str);
 
-        let check_tail: Vec<String> =
-            WithEOL::tail(PATH.to_string(), len, false, false, false, "".to_string(), false);
+        let check_tail: Vec<String> = WithEOL::tail(
+            PATH.to_string(),
+            len,
+            false,
+            false,
+            false,
+            "".to_string(),
+            false,
+        );
 
         cmp_vector(tail_ref, check_tail);
     }
@@ -85,8 +92,15 @@ mod tests_with_eol_tail {
 
         let tail_ref: Vec<String> = convert_string_to_list(tail_ref_str);
 
-        let check_tail: Vec<String> =
-            WithEOL::tail(PATH.to_string(), len, false, false, false, "".to_string(), false);
+        let check_tail: Vec<String> = WithEOL::tail(
+            PATH.to_string(),
+            len,
+            false,
+            false,
+            false,
+            "".to_string(),
+            false,
+        );
         cmp_vector(tail_ref, check_tail);
     }
 
@@ -113,8 +127,15 @@ mod tests_with_eol_tail {
 
         let tail_ref: Vec<String> = convert_string_to_list(tail_ref_str);
 
-        let check_tail: Vec<String> =
-            WithEOL::tail(PATH.to_string(), len, false, false, false, "".to_string(), false);
+        let check_tail: Vec<String> = WithEOL::tail(
+            PATH.to_string(),
+            len,
+            false,
+            false,
+            false,
+            "".to_string(),
+            false,
+        );
         cmp_vector(tail_ref, check_tail);
     }
 
@@ -141,8 +162,15 @@ mod tests_with_eol_tail {
 
         let tail_ref: Vec<String> = convert_string_to_list(tail_ref_str);
 
-        let check_tail: Vec<String> =
-            WithEOL::tail(PATH.to_string(), len, true, false, false, "".to_string(), false);
+        let check_tail: Vec<String> = WithEOL::tail(
+            PATH.to_string(),
+            len,
+            true,
+            false,
+            false,
+            "".to_string(),
+            false,
+        );
 
         /*for i in 0..tail_ref.len() {
             println!("{}$;{}$", tail_ref[i], check_tail[i]);
@@ -174,8 +202,15 @@ mod tests_with_eol_tail {
 
         let tail_ref: Vec<String> = convert_string_to_list(tail_ref_str);
 
-        let check_tail: Vec<String> =
-            WithEOL::tail(PATH.to_string(), len, true, false, false, "".to_string(), false);
+        let check_tail: Vec<String> = WithEOL::tail(
+            PATH.to_string(),
+            len,
+            true,
+            false,
+            false,
+            "".to_string(),
+            false,
+        );
         cmp_vector(tail_ref, check_tail);
     }
 
@@ -202,8 +237,15 @@ mod tests_with_eol_tail {
 
         let tail_ref: Vec<String> = convert_string_to_list(tail_ref_str);
 
-        let check_tail: Vec<String> =
-            WithEOL::tail(PATH.to_string(), len, true, false, false, "".to_string(), false);
+        let check_tail: Vec<String> = WithEOL::tail(
+            PATH.to_string(),
+            len,
+            true,
+            false,
+            false,
+            "".to_string(),
+            false,
+        );
 
         cmp_vector(tail_ref, check_tail);
     }

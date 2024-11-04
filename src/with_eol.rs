@@ -60,7 +60,7 @@ impl WithEOL {
         keep_when_regex: bool,
         pass_when_regex: bool,
         regex: String,
-        restrict: bool
+        restrict: bool,
     ) -> Vec<String> {
         let mut result: Vec<String> = Vec::new();
         let re: Regex = Regex::new(&regex).unwrap();
@@ -75,17 +75,15 @@ impl WithEOL {
             } else if pass_when_regex && re.is_match(line) {
                 continue;
             }
-            count_elems+=1;
+            count_elems += 1;
 
             if restrict && count_lines > n2 {
                 break;
             } else if restrict && count_lines >= n1 {
                 result.push(line.to_string());
-            }
-            else if !restrict && count_elems > n2 {
+            } else if !restrict && count_elems > n2 {
                 break;
-            }
-            else if !restrict && count_elems >= n1 {
+            } else if !restrict && count_elems >= n1 {
                 result.push(line.to_string());
             }
         }
@@ -101,7 +99,7 @@ impl WithEOL {
         keep_when_regex: bool,
         pass_when_regex: bool,
         regex: String,
-        restrict: bool
+        restrict: bool,
     ) -> Vec<String> {
         let mut result: VecDeque<String> = VecDeque::with_capacity(n);
         let mut restrict_index: VecDeque<usize> = VecDeque::with_capacity(n);
@@ -134,8 +132,7 @@ impl WithEOL {
             for i in 0..restrict_index.len() {
                 if count > n && restrict_index[i] < (count - n) {
                     result.remove(0);
-                }
-                else {
+                } else {
                     break;
                 }
             }
