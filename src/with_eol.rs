@@ -56,7 +56,7 @@ impl WithEOL {
             if remove_empty_string && line.to_string().is_empty() {
                 continue;
             } else if keep_when_regex && re_keep.len() > 0 && !check_regex(line, &re_keep) {
-                    continue;
+                continue;
             } else if pass_when_regex && re_pass.len() > 0 && check_regex(line, &re_pass) {
                 continue;
             }

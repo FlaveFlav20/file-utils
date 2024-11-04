@@ -50,7 +50,7 @@ mod tests_with_eol_count_lines {
             false,
             false,
             Vec::new(),
-            Vec::new()
+            Vec::new(),
         );
 
         assert_eq!(count_ref.len(), check_count);

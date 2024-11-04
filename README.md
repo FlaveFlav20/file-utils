@@ -17,7 +17,7 @@ for line in f.readlines():
 - With the first one, there is a memory issue beacause you must save the entire file into a buffer. 
 - With the second one, there is a time issue because a loop can be very slow in python.
 
-So, this package gives tools to easily read a file with efficienty. It's based on linux tools like **grep**, **sed**, **cat** and tested with them.
+So, this package gives tools to easily read a file with efficienty. It's based on linux tools like **grep**, **sed**, **cat**, **head**, **tail** and tested with them.
 
 # Example
 
