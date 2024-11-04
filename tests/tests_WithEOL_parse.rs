@@ -60,7 +60,7 @@ mod tests_with_eol_parse {
         };
 
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
-        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), false, false, false, "".to_string());
+        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), false, false, false, Vec::new(), Vec::new());
 
         cmp_vector(parse_ref, check_parse);
     }
@@ -86,7 +86,7 @@ mod tests_with_eol_parse {
         };
 
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
-        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), true, false, false, "".to_string());
+        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), true, false, false, Vec::new(), Vec::new());
 
         cmp_vector(parse_ref, check_parse);
     }
@@ -111,8 +111,11 @@ mod tests_with_eol_parse {
             Err(_e) => panic!("Error convertion"),
         };
 
+        let mut reg: Vec<String> = Vec::new();
+        reg.push("^La loi".to_string());
+
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
-        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), false, true, false, "^La loi".to_string());
+        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), false, true, false, reg, Vec::new());
 
         cmp_vector(parse_ref, check_parse);
     }
@@ -137,8 +140,11 @@ mod tests_with_eol_parse {
             Err(_e) => panic!("Error convertion"),
         };
 
+        let mut reg: Vec<String> = Vec::new();
+        reg.push("^La loi".to_string());
+
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
-        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), true, true, false, "^La loi".to_string());
+        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), true, true, false, reg, Vec::new());
 
         cmp_vector(parse_ref, check_parse);
     }
@@ -163,8 +169,11 @@ mod tests_with_eol_parse {
             Err(_e) => panic!("Error convertion"),
         };
 
+        let mut reg: Vec<String> = Vec::new();
+        reg.push("^La loi".to_string());
+
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
-        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), false, false, true, "^La loi".to_string());
+        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), false, false, true, Vec::new(), reg);
 
         cmp_vector(parse_ref, check_parse);
     }
@@ -189,8 +198,11 @@ mod tests_with_eol_parse {
             Err(_e) => panic!("Error convertion"),
         };
 
+        let mut reg: Vec<String> = Vec::new();
+        reg.push("^La loi".to_string());
+
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
-        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), true, false, true, "^La loi".to_string());
+        let check_parse: Vec<String> = WithEOL::parse(PATH.to_string(), true, false, true, Vec::new(), reg);
 
         cmp_vector(parse_ref, check_parse);
     }

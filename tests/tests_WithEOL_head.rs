@@ -69,7 +69,8 @@ mod tests_with_eol_head {
             false,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
 
@@ -105,7 +106,8 @@ mod tests_with_eol_head {
             false,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
         cmp_vector(head_ref, check_head);
@@ -140,7 +142,8 @@ mod tests_with_eol_head {
             false,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
         cmp_vector(head_ref, check_head);
@@ -175,7 +178,8 @@ mod tests_with_eol_head {
             true,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
         cmp_vector(head_ref, check_head);
@@ -210,7 +214,8 @@ mod tests_with_eol_head {
             true,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
         cmp_vector(head_ref, check_head);
@@ -245,7 +250,8 @@ mod tests_with_eol_head {
             true,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
 

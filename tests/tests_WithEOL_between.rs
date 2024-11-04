@@ -77,7 +77,8 @@ mod tests_with_eol_between {
             false,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
 
@@ -121,7 +122,8 @@ mod tests_with_eol_between {
             false,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
 
@@ -140,7 +142,8 @@ mod tests_with_eol_between {
             false,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
 
@@ -185,7 +188,8 @@ mod tests_with_eol_between {
             true,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
 
@@ -231,7 +235,8 @@ mod tests_with_eol_between {
             true,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
         cmp_vector(between_ref, check_between);
@@ -249,7 +254,8 @@ mod tests_with_eol_between {
             true,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
         cmp_vector(between_ref, check_between);

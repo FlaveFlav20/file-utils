@@ -2,36 +2,10 @@ import file_operations_lib
 import unittest
 import os
 
+from custom_files import create_regex_test_file, headers
+
 path: str = "./tests_files/DDHC.txt"
 custom_path: str = "./tests_files/custom.txt"
-
-warning: str = "[Warning]:"
-error: str = "[Error]:"
-info: str = "[Info]:"
-
-message_1: str = "Entity not found\n"
-message_2: str = "Function not found\n"
-message_2: str = "Unable to recover data\n"
-message_3: str = "Segfault\n"
-message_4: str = "Indentation\n"
-message_5: str = "Memory leaks\n"
-headers: list = [warning, error, info]
-messages: list = [message_1, message_2, message_3, message_4, message_5]
-
-def create_regex_test_file(path: str) -> bool:
-    global headers
-    global messages
-
-    try:
-        f = open(path, "w")
-
-        for i in range(100):
-            f.write(headers[i % len(headers)] + messages[i % len(messages)])
-
-        f.close()
-        return True
-    except:
-        return False
 
 if __name__ == '__main__':
     create_regex_test_file(custom_path)
@@ -215,21 +189,21 @@ class TestWithEOFHead(unittest.TestCase):
     def test_head_n_10_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_Warning(self):
         n: int = 10
         global headers
-        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, keep_when_regex=True, regex="\[Warning\]:.*", restrict=True)
+        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, keep_when_regex=True, regex_keep=["\[Warning\]:.*"], restrict=True)
 
         self.assertEqual(len(result_to_test), n // len(headers) + 1)
 
     def test_head_n_10_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_Info(self):
         n: int = 10
         global headers
-        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, keep_when_regex=True, regex="\[Info\]:.*", restrict=True)
+        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, keep_when_regex=True, regex_keep=["\[Info\]:.*"], restrict=True)
 
         self.assertEqual(len(result_to_test), n // len(headers))
 
     def test_head_n_10_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_Error(self):
         n: int = 10
         global headers
-        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, keep_when_regex=True, regex="\[Error\]:.*", restrict=True)
+        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, keep_when_regex=True, regex_keep=["\[Error\]:.*"], restrict=True)
 
         self.assertEqual(len(result_to_test), n // len(headers))
 

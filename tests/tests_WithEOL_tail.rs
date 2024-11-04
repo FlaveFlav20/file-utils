@@ -21,7 +21,7 @@ fn cmp_vector(vec1: Vec<String>, vec2: Vec<String>) -> () {
 
 fn convert_string_to_list(str: String) -> Vec<String> {
     let mut convert: Vec<String> = str.split('\n').map(|e| e.to_string()).collect();
-    if convert.len() == 1 && convert[0] == "".to_string() {
+    if convert.len() == 1 && convert[0].is_empty() {
         convert = Vec::new();
     }
     convert
@@ -62,7 +62,8 @@ mod tests_with_eol_tail {
             false,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
 
@@ -98,7 +99,8 @@ mod tests_with_eol_tail {
             false,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
         cmp_vector(tail_ref, check_tail);
@@ -133,7 +135,8 @@ mod tests_with_eol_tail {
             false,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
         cmp_vector(tail_ref, check_tail);
@@ -168,7 +171,8 @@ mod tests_with_eol_tail {
             true,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
 
@@ -208,7 +212,8 @@ mod tests_with_eol_tail {
             true,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
         cmp_vector(tail_ref, check_tail);
@@ -243,7 +248,8 @@ mod tests_with_eol_tail {
             true,
             false,
             false,
-            "".to_string(),
+            Vec::new(),
+            Vec::new(),
             false,
         );
 
