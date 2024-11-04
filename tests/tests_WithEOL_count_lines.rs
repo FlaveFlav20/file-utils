@@ -47,8 +47,6 @@ mod tests_with_eol_count_lines {
         let check_count: usize = WithEOL::count_lines(
             PATH.to_string(),
             false,
-            false,
-            false,
             Vec::new(),
             Vec::new(),
         );

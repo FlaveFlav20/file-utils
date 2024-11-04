@@ -162,7 +162,7 @@ class TestWithEOFTail(unittest.TestCase):
     def test_tail_n_valid_invalid_remove_empty_string_false_keep_when_regex_invalid(self):
         check_pass: bool = True 
         try:
-            file_operations_lib.WithEOL.tail(file=path, n=n, remove_empty_string=True, keep_when_regex="Haha")
+            file_operations_lib.WithEOL.tail(file=path, n=n, remove_empty_string=True, regex_keep="Haha")
         except:
             check_pass = False
         if check_pass:
@@ -171,7 +171,7 @@ class TestWithEOFTail(unittest.TestCase):
     def test_tail_n_valid_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_invalid(self):
         check_pass: bool = True 
         try:
-            file_operations_lib.WithEOL.tail(file=path, n=n, remove_empty_string=True, keep_when_regex=False, pass_when_regex="Haha")
+            file_operations_lib.WithEOL.tail(file=path, n=n, remove_empty_string=True, regex_pass="Haha")
         except:
             check_pass = False
         if check_pass:
@@ -180,7 +180,7 @@ class TestWithEOFTail(unittest.TestCase):
     def test_tail_n_valid_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_invalid(self):
         check_pass: bool = True 
         try:
-            file_operations_lib.WithEOL.tail(file=path, n=n, remove_empty_string=True, keep_when_regex=False, pass_when_regex=True, regex=1)
+            file_operations_lib.WithEOL.tail(file=path, n=n, remove_empty_string=True, regex=1)
         except:
             check_pass = False
         if check_pass:
@@ -189,21 +189,21 @@ class TestWithEOFTail(unittest.TestCase):
     def test_tail_n_10_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_Warning(self):
         n: int = 10
         global headers
-        result_to_test: list = file_operations_lib.WithEOL.tail(file=custom_path, n=n, keep_when_regex=True, regex_keep=["\[Warning\]:.*"], restrict=True)
+        result_to_test: list = file_operations_lib.WithEOL.tail(file=custom_path, n=n, regex_keep=["\[Warning\]:.*"], restrict=True)
 
         self.assertEqual(len(result_to_test), n // len(headers) + 1)
 
     def test_tail_n_10_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_Info(self):
         n: int = 10
         global headers
-        result_to_test: list = file_operations_lib.WithEOL.tail(file=custom_path, n=n, keep_when_regex=True, regex_keep=["\[Info\]:.*"], restrict=True)
+        result_to_test: list = file_operations_lib.WithEOL.tail(file=custom_path, n=n, regex_keep=["\[Info\]:.*"], restrict=True)
 
         self.assertEqual(len(result_to_test), n // len(headers) + 1)
 
     def test_tail_n_10_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_Error(self):
         n: int = 10
         global headers
-        result_to_test: list = file_operations_lib.WithEOL.tail(file=custom_path, n=n, keep_when_regex=True, regex_keep=["\[Error\]:.*"], restrict=True)
+        result_to_test: list = file_operations_lib.WithEOL.tail(file=custom_path, n=n, regex_keep=["\[Error\]:.*"], restrict=True)
 
         self.assertEqual(len(result_to_test), n // len(headers))
 

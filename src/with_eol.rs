@@ -31,13 +31,11 @@ pub struct WithEOL {}
 #[pymethods]
 impl WithEOL {
     #[staticmethod]
-    #[pyo3(signature = (file, n, remove_empty_string=false, keep_when_regex=false, pass_when_regex=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
+    #[pyo3(signature = (file, n, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
     pub fn head(
         file: String,
         n: usize,
         remove_empty_string: bool,
-        keep_when_regex: bool,
-        pass_when_regex: bool,
         regex_keep: Vec<String>,
         regex_pass: Vec<String>,
         restrict: bool,
@@ -55,9 +53,9 @@ impl WithEOL {
             count += 1;
             if remove_empty_string && line.to_string().is_empty() {
                 continue;
-            } else if keep_when_regex && re_keep.len() > 0 && !check_regex(line, &re_keep) {
+            } else if re_keep.len() > 0 && !check_regex(line, &re_keep) {
                 continue;
-            } else if pass_when_regex && re_pass.len() > 0 && check_regex(line, &re_pass) {
+            } else if re_pass.len() > 0 && check_regex(line, &re_pass) {
                 continue;
             }
             if restrict && (count - 1) >= n {
@@ -72,14 +70,12 @@ impl WithEOL {
     }
 
     #[staticmethod]
-    #[pyo3(signature = (file, n1, n2, remove_empty_string=false, keep_when_regex=false, pass_when_regex=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
+    #[pyo3(signature = (file, n1, n2, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
     pub fn between(
         file: String,
         n1: usize,
         n2: usize,
         remove_empty_string: bool,
-        keep_when_regex: bool,
-        pass_when_regex: bool,
         regex_keep: Vec<String>,
         regex_pass: Vec<String>,
         restrict: bool,
@@ -94,9 +90,9 @@ impl WithEOL {
             count_lines += 1;
             if remove_empty_string && line.to_string().is_empty() {
                 continue;
-            } else if keep_when_regex && re_keep.len() > 0 && !check_regex(line, &re_keep) {
+            } else if re_keep.len() > 0 && !check_regex(line, &re_keep) {
                 continue;
-            } else if pass_when_regex && re_pass.len() > 0 && check_regex(line, &re_pass) {
+            } else if re_pass.len() > 0 && check_regex(line, &re_pass) {
                 continue;
             }
             count_elems += 1;
@@ -115,13 +111,11 @@ impl WithEOL {
     }
 
     #[staticmethod]
-    #[pyo3(signature = (file, n, remove_empty_string=false, keep_when_regex=false, pass_when_regex=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
+    #[pyo3(signature = (file, n, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
     pub fn tail(
         file: String,
         n: usize,
         remove_empty_string: bool,
-        keep_when_regex: bool,
-        pass_when_regex: bool,
         regex_keep: Vec<String>,
         regex_pass: Vec<String>,
         restrict: bool,
@@ -140,9 +134,9 @@ impl WithEOL {
             count += 1;
             if remove_empty_string && line.to_string().trim().is_empty() {
                 continue;
-            } else if keep_when_regex && re_keep.len() > 0 && !check_regex(line, &re_keep) {
+            } else if re_keep.len() > 0 && !check_regex(line, &re_keep) {
                 continue;
-            } else if pass_when_regex && re_pass.len() > 0 && check_regex(line, &re_pass) {
+            } else if re_pass.len() > 0 && check_regex(line, &re_pass) {
                 continue;
             }
             if result.len() == n {
@@ -167,12 +161,10 @@ impl WithEOL {
     }
 
     #[staticmethod]
-    #[pyo3(signature = (file, remove_empty_string=false, keep_when_regex=false, pass_when_regex=false, regex_keep=Vec::new(), regex_pass=Vec::new()))]
+    #[pyo3(signature = (file, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new()))]
     pub fn parse(
         file: String,
         remove_empty_string: bool,
-        keep_when_regex: bool,
-        pass_when_regex: bool,
         regex_keep: Vec<String>,
         regex_pass: Vec<String>,
     ) -> Vec<String> {
@@ -183,9 +175,9 @@ impl WithEOL {
         for line in read_to_string(file).unwrap().lines() {
             if remove_empty_string && line.to_string().is_empty() {
                 continue;
-            } else if keep_when_regex && re_keep.len() > 0 && !check_regex(line, &re_keep) {
+            } else if re_keep.len() > 0 && !check_regex(line, &re_keep) {
                 continue;
-            } else if pass_when_regex && re_pass.len() > 0 && check_regex(line, &re_pass) {
+            } else if re_pass.len() > 0 && check_regex(line, &re_pass) {
                 continue;
             }
             result.push(line.to_string());
@@ -194,12 +186,10 @@ impl WithEOL {
     }
 
     #[staticmethod]
-    #[pyo3(signature = (file, remove_empty_string=false, keep_when_regex=false, pass_when_regex=false, regex_keep=Vec::new(), regex_pass=Vec::new()))]
+    #[pyo3(signature = (file, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new()))]
     pub fn count_lines(
         file: String,
         remove_empty_string: bool,
-        keep_when_regex: bool,
-        pass_when_regex: bool,
         regex_keep: Vec<String>,
         regex_pass: Vec<String>,
     ) -> usize {
@@ -210,9 +200,9 @@ impl WithEOL {
         for line in read_to_string(file).unwrap().lines() {
             if remove_empty_string && line.to_string().is_empty() {
                 continue;
-            } else if keep_when_regex && re_keep.len() > 0 && !check_regex(line, &re_keep) {
+            } else if re_keep.len() > 0 && !check_regex(line, &re_keep) {
                 continue;
-            } else if pass_when_regex && re_pass.len() > 0 && check_regex(line, &re_pass) {
+            } else if re_pass.len() > 0 && check_regex(line, &re_pass) {
                 continue;
             }
             res += 1;

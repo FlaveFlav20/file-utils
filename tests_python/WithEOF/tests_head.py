@@ -158,29 +158,11 @@ class TestWithEOFHead(unittest.TestCase):
             self.fail("[head] Negative value shouldn't work")
 
 ## Test regex
-
-    def test_head_n_valid_invalid_remove_empty_string_false_keep_when_regex_invalid(self):
-        check_pass: bool = True 
-        try:
-            file_operations_lib.WithEOL.head(file=path, n=n, remove_empty_string=True, keep_when_regex="Haha")
-        except:
-            check_pass = False
-        if check_pass:
-            self.fail("[head] Non bool value shouldn't work")
-
-    def test_head_n_valid_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_invalid(self):
-        check_pass: bool = True 
-        try:
-            file_operations_lib.WithEOL.head(file=path, n=n, remove_empty_string=True, keep_when_regex=False, pass_when_regex="Haha")
-        except:
-            check_pass = False
-        if check_pass:
-            self.fail("[head] Non bool value shouldn't work")
         
     def test_head_n_valid_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_invalid(self):
         check_pass: bool = True 
         try:
-            file_operations_lib.WithEOL.head(file=path, n=n, remove_empty_string=True, keep_when_regex=False, pass_when_regex=True, regex=1)
+            file_operations_lib.WithEOL.head(file=path, n=n, remove_empty_string=True, regex_keep=1)
         except:
             check_pass = False
         if check_pass:
@@ -189,21 +171,21 @@ class TestWithEOFHead(unittest.TestCase):
     def test_head_n_10_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_Warning(self):
         n: int = 10
         global headers
-        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, keep_when_regex=True, regex_keep=["\[Warning\]:.*"], restrict=True)
+        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, regex_keep=["\[Warning\]:.*"], restrict=True)
 
         self.assertEqual(len(result_to_test), n // len(headers) + 1)
 
     def test_head_n_10_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_Info(self):
         n: int = 10
         global headers
-        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, keep_when_regex=True, regex_keep=["\[Info\]:.*"], restrict=True)
+        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, regex_keep=["\[Info\]:.*"], restrict=True)
 
         self.assertEqual(len(result_to_test), n // len(headers))
 
     def test_head_n_10_invalid_remove_empty_string_false_keep_when_regex_valid_pass_when_regex_valid_regex_Error(self):
         n: int = 10
         global headers
-        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, keep_when_regex=True, regex_keep=["\[Error\]:.*"], restrict=True)
+        result_to_test: list = file_operations_lib.WithEOL.head(file=custom_path, n=n, regex_keep=["\[Error\]:.*"], restrict=True)
 
         self.assertEqual(len(result_to_test), n // len(headers))
 

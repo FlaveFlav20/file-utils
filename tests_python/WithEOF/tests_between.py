@@ -71,7 +71,7 @@ class TestWithEOFBetween(unittest.TestCase):
         if check_pass:
             self.fail("[between] Negative value shouldn't work")
 
-##
+## 
 
     def test_between_n1_1_n2_1_valid_remove_empty_string_true(self):
         n1: int = 1
@@ -130,8 +130,6 @@ class TestWithEOFBetween(unittest.TestCase):
             check_pass = False
         if check_pass:
             self.fail("[between] Negative value shouldn't work")
-
-##
 
 if __name__ == '__main__':
     unittest.main()

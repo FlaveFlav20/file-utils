@@ -63,8 +63,6 @@ mod tests_with_eol_parse {
         let check_parse: Vec<String> = WithEOL::parse(
             PATH.to_string(),
             false,
-            false,
-            false,
             Vec::new(),
             Vec::new(),
         );
@@ -94,7 +92,7 @@ mod tests_with_eol_parse {
 
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
         let check_parse: Vec<String> =
-            WithEOL::parse(PATH.to_string(), true, false, false, Vec::new(), Vec::new());
+            WithEOL::parse(PATH.to_string(), true, Vec::new(), Vec::new());
 
         cmp_vector(parse_ref, check_parse);
     }
@@ -124,7 +122,7 @@ mod tests_with_eol_parse {
 
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
         let check_parse: Vec<String> =
-            WithEOL::parse(PATH.to_string(), false, true, false, reg, Vec::new());
+            WithEOL::parse(PATH.to_string(), false, reg, Vec::new());
 
         cmp_vector(parse_ref, check_parse);
     }
@@ -154,7 +152,7 @@ mod tests_with_eol_parse {
 
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
         let check_parse: Vec<String> =
-            WithEOL::parse(PATH.to_string(), true, true, false, reg, Vec::new());
+            WithEOL::parse(PATH.to_string(), true, reg, Vec::new());
 
         cmp_vector(parse_ref, check_parse);
     }
@@ -184,7 +182,7 @@ mod tests_with_eol_parse {
 
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
         let check_parse: Vec<String> =
-            WithEOL::parse(PATH.to_string(), false, false, true, Vec::new(), reg);
+            WithEOL::parse(PATH.to_string(), false, Vec::new(), reg);
 
         cmp_vector(parse_ref, check_parse);
     }
@@ -214,7 +212,7 @@ mod tests_with_eol_parse {
 
         let parse_ref: Vec<String> = convert_string_to_list(parse_ref_str);
         let check_parse: Vec<String> =
-            WithEOL::parse(PATH.to_string(), true, false, true, Vec::new(), reg);
+            WithEOL::parse(PATH.to_string(), true, Vec::new(), reg);
 
         cmp_vector(parse_ref, check_parse);
     }

@@ -35,48 +35,43 @@ except:
     print("Unable to open/read the file)
 ```
 
-## Python structure
+## Python class
 
 If we translate the rust into python, we'll have:
 ```py
 class WithEOL:
     def head(file: str, n: int, \
                 remove_empty_string: bool = False, \
-                keep_when_regex: bool = False, \
-                pass_when_regex: bool = False, \
                 regex_keep: list = [] \
                 regex_pass: list = [] \
-                restrict: bool = True)
+                restrict: bool = True):
+        ...
 
     def between(file: str, n1: int, n2: int \
                 remove_empty_string: bool = False, \
-                keep_when_regex: bool = False, \
-                pass_when_regex: bool = False, \
                 regex_keep: list = [] \
                 regex_pass: list = [] \
-                restrict: bool = True)
+                restrict: bool = True):
+        ...
     
     def tail(file: str, n: int, \
                 remove_empty_string: bool = False, \
-                keep_when_regex: bool = False, \
-                pass_when_regex: bool = False, \
                 regex_keep: list = [] \
                 regex_pass: list = [] \
-                restrict: bool = True)
+                restrict: bool = True):
+        ...
     
     def parse(file: str, \ 
                 remove_empty_string: bool = False \
-                keep_when_regex: bool = False \
-                pass_when_regex: bool = False \
                 regex_keep: list = [] \
-                regex_pass: list = [])
+                regex_pass: list = []):
+        ...
 
     def count_lines(file: str \
                     remove_empty_string: bool = False, \
-                    keep_when_regex: bool = False \
-                    pass_when_regex: bool = False \
                     regex_keep: list = [] \
-                    regex_pass: list = [])
+                    regex_pass: list = []):
+        ...
 ```
 
 ## Arguments explaination
@@ -89,10 +84,8 @@ class WithEOL:
 - **restrict**: if enbla, if we have last N lines, it just keep the regex in thoses lines. If not enable, it takes last N regex
 
 with **regex**:
-- **keep_when_regex**: if enable, it ignore other lines that maching with the regex
-- **pass_when_regex**: if anable, it ignore the lines that maching with regex
-- **regex_keep**: list of regex to keep if **keep_when_regex** is enable
-- **regex_pass**: list of regex to pass if **pass_when_regex** is enable
+- **regex_keep**: list of regex to keep
+- **regex_pass**: list of regex to pass/ignore
 
 ## Structure
 
