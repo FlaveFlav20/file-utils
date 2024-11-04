@@ -148,8 +148,8 @@ impl WithEOL {
         keep_when_regex: bool,
         pass_when_regex: bool,
         regex: String,
-    ) -> usize {
-        let mut res: usize = 0;
+    ) -> Vec<String> {
+        let mut result: Vec<String> = Vec::new();
         let re: Regex = Regex::new(&regex).unwrap();
         for line in read_to_string(file).unwrap().lines() {
             if remove_empty_string && line.to_string().is_empty() {
@@ -159,9 +159,9 @@ impl WithEOL {
             } else if pass_when_regex && re.is_match(line) {
                 continue;
             }
-            res += 1;
+            result.push(line.to_string());
         }
-        res
+        result
     }
 
     #[staticmethod]

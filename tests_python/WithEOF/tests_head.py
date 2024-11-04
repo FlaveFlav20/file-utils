@@ -234,6 +234,5 @@ class TestWithEOFHead(unittest.TestCase):
         self.assertEqual(len(result_to_test), n // len(headers))
 
 
-
 if __name__ == '__main__':
     unittest.main()
