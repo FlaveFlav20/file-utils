@@ -20,14 +20,14 @@ class TestWithEOFBetween(unittest.TestCase):
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2), ref)
+        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, restrict=False), ref)
 
     def test_between_n1_2_n2_1_valid_remove_empty_string_false(self):
         n1: int = 2
         n2: int = 1
         res: str= ""
         ref: list = get_list(res)
-        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2), ref)
+        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, restrict=False), ref)
 
     def test_between_n1_1_n2_2_valid_remove_empty_string_false(self):
         n1: int = 1
@@ -36,14 +36,14 @@ class TestWithEOFBetween(unittest.TestCase):
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2), ref)
+        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, restrict=False), ref)
 
     def test_between_n1_neg_n2_pos_invalid_remove_empty_string_false(self):
         check_pass: bool = True 
         n1: int = -1
         n2: int = 1
         try:
-            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2)
+            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, restrict=False)
         except:
             check_pass = False
         if check_pass:
@@ -54,7 +54,7 @@ class TestWithEOFBetween(unittest.TestCase):
         n1: int = 1
         n2: int = -1
         try:
-            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2)
+            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, restrict=False)
         except:
             check_pass = False
         if check_pass:
@@ -65,7 +65,7 @@ class TestWithEOFBetween(unittest.TestCase):
         n1: int = -1
         n2: int = -1
         try:
-            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2)
+            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, restrict=False)
         except:
             check_pass = False
         if check_pass:
@@ -80,14 +80,14 @@ class TestWithEOFBetween(unittest.TestCase):
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True), ref)
+        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True, restrict=False), ref)
 
     def test_between_n1_2_n2_1_valid_remove_empty_string_true(self):
         n1: int = 2
         n2: int = 1
         res: str= ""
         ref: list = get_list(res)
-        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True), ref)
+        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True, restrict=False), ref)
 
     def test_between_n1_1_n2_2_valid_remove_empty_string_true(self):
         n1: int = 1
@@ -96,14 +96,14 @@ class TestWithEOFBetween(unittest.TestCase):
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True), ref)
+        self.assertEqual(file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True, restrict=False), ref)
 
     def test_between_n1_neg_n2_pos_invalid_remove_empty_string_true(self):
         check_pass: bool = True 
         n1: int = -1
         n2: int = 1
         try:
-            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True)
+            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True, restrict=False)
         except:
             check_pass = False
         if check_pass:
@@ -114,7 +114,7 @@ class TestWithEOFBetween(unittest.TestCase):
         n1: int = 1
         n2: int = -1
         try:
-            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True)
+            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True, restrict=False)
         except:
             check_pass = False
         if check_pass:
@@ -125,7 +125,7 @@ class TestWithEOFBetween(unittest.TestCase):
         n1: int = -1
         n2: int = -1
         try:
-            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True)
+            file_operations_lib.WithEOL.between(file=path, n1=n1, n2=n2, remove_empty_string=True, restrict=False)
         except:
             check_pass = False
         if check_pass:

@@ -51,7 +51,7 @@ impl WithEOL {
     }
 
     #[staticmethod]
-    #[pyo3(signature = (file, n1, n2, remove_empty_string=false, keep_when_regex=false, pass_when_regex=false, regex="".to_string()))]
+    #[pyo3(signature = (file, n1, n2, remove_empty_string=false, keep_when_regex=false, pass_when_regex=false, regex="".to_string(), restrict=true))]
     pub fn between(
         file: String,
         n1: usize,
@@ -60,11 +60,14 @@ impl WithEOL {
         keep_when_regex: bool,
         pass_when_regex: bool,
         regex: String,
+        restrict: bool
     ) -> Vec<String> {
         let mut result: Vec<String> = Vec::new();
         let re: Regex = Regex::new(&regex).unwrap();
-        let mut counter: usize = 1;
+        let mut count_lines: usize = 0;
+        let mut count_elems: usize = 0;
         for line in read_to_string(file).unwrap().lines() {
+            count_lines += 1;
             if remove_empty_string && line.to_string().is_empty() {
                 continue;
             } else if keep_when_regex && !re.is_match(line) {
@@ -72,12 +75,19 @@ impl WithEOL {
             } else if pass_when_regex && re.is_match(line) {
                 continue;
             }
-            if counter > n2 {
+            count_elems+=1;
+
+            if restrict && count_lines > n2 {
                 break;
-            } else if counter >= n1 {
+            } else if restrict && count_lines >= n1 {
                 result.push(line.to_string());
             }
-            counter += 1;
+            else if !restrict && count_elems > n2 {
+                break;
+            }
+            else if !restrict && count_elems >= n1 {
+                result.push(line.to_string());
+            }
         }
         result
     }
