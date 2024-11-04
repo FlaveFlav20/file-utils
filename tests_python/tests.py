@@ -1,11 +1,6 @@
 import unittest
 
-import sys
 import os
-from os.path import dirname
-
-sys.path.append(os.path.abspath("WithEOF"))
-print(sys.path)
 
 from WithEOF.tests_tail import TestWithEOFTail
 from WithEOF.tests_head import TestWithEOFHead
