@@ -89,6 +89,7 @@ mod tests_with_eol_tail {
             WithEOL::tail(PATH.to_string(), len, false, false, false, "".to_string());
         cmp_vector(tail_ref, check_tail);
     }
+
     #[test]
     fn tail_n_0_valid_remove_empty_string_false() {
         let len: usize = 0;
@@ -177,6 +178,7 @@ mod tests_with_eol_tail {
             WithEOL::tail(PATH.to_string(), len, true, false, false, "".to_string());
         cmp_vector(tail_ref, check_tail);
     }
+
     #[test]
     fn tail_n_0_valid_remove_empty_string_true() {
         let len: usize = 0;

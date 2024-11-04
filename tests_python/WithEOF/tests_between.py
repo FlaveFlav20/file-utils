@@ -130,3 +130,6 @@ class TestWithEOFBetween(unittest.TestCase):
             check_pass = False
         if check_pass:
             self.fail("[between] Negative value shouldn't work")
+
+if __name__ == '__main__':
+    unittest.main()

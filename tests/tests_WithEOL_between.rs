@@ -217,6 +217,7 @@ mod tests_with_eol_between {
             WithEOL::between(PATH.to_string(), n1, n2, true, false, false, "".to_string());
         cmp_vector(between_ref, check_between);
     }
+
     #[test]
     fn between_n1_5_n2_4_valid_remove_empty_string_true() {
         let n1: usize = 5;
