@@ -1,3 +1,9 @@
+import os
+from pathlib import Path
+
+custom_path: str = os.path.join(Path(os.path.realpath(__file__)).parent, "..", "tests_files", "custom.txt")
+path: str = os.path.join(Path(os.path.realpath(__file__)).parent, "..", "tests_files", "DDHC.txt")
+
 warning: str = "[Warning]:"
 error: str = "[Error]:"
 info: str = "[Info]:"
@@ -26,5 +32,14 @@ def create_regex_test_file(path: str) -> bool:
     except:
         return False
 
-path: str = "./tests_files/DDHC.txt"
-custom_path: str = "./tests_files/custom.txt"
+# get_list: string to list converter
+#   - args: a string -> output of a command
+#   - return: a list that contain each line of the output
+
+def get_list(string: str) -> list:
+    res: list = string.split("\n")
+    if len(res) == 1 and res[0] == '':
+        return []
+    elif len(res) > 1 and res[-1] == '':
+        res.pop()
+    return res 

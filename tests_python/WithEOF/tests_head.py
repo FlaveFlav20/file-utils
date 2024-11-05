@@ -2,18 +2,10 @@ import file_operations_lib
 import unittest
 import os
 
-from custom_files import create_regex_test_file, headers, path, custom_path
-
-if __name__ == '__main__':
-    create_regex_test_file(custom_path)
-
-def get_list(string: str) -> list:
-    res: list = string.split("\n")
-    if len(res) == 1 and res[0] == '':
-        return []
-    elif len(res) > 1 and res[-1] == '':
-        res.pop()
-    return res 
+# Variables
+from custom_files import headers, path, custom_path
+# Functions
+from custom_files import create_regex_test_file, get_list
 
 class TestWithEOFHead(unittest.TestCase):
     def test_head_n_10_valid_remove_empty_string_false(self):
@@ -188,4 +180,5 @@ class TestWithEOFHead(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    create_regex_test_file(custom_path)
     unittest.main()

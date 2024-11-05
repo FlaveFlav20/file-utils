@@ -2,15 +2,10 @@ import file_operations_lib
 import unittest
 import os
 
+# Variables
 from custom_files import path
-
-def get_list(string: str) -> list:
-    res: list = string.split("\n")
-    if len(res) == 1 and res[0] == '':
-        return []
-    elif len(res) > 1 and res[-1] == '':
-        res.pop()
-    return res 
+# Functions
+from custom_files import get_list
 
 class TestWithEOFParse(unittest.TestCase):
     def test_parse_no_options(self):

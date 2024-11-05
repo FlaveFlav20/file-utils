@@ -2,25 +2,10 @@ import file_operations_lib
 import unittest
 import os
 
+# Variable
 from custom_files import path, custom_path
-
-def create_regex_test_file(path: str) -> bool:
-    global headers
-    global messages
-
-    try:
-        f = open(path, "w")
-
-        for i in range(100):
-            f.write(headers[i % len(headers)] + messages[i % len(messages)])
-
-        f.close()
-        return True
-    except:
-        return False
-
-if __name__ == '__main__':
-    create_regex_test_file(custom_path)
+# Functions
+from custom_files import get_list, create_regex_test_file
 
 def get_list(string: str) -> list:
     res: list = string.split("\n")
@@ -74,4 +59,5 @@ class TestWithEOFCountLines(unittest.TestCase):
         self.assertEqual(file_operations_lib.WithEOL.count_lines(path=path, remove_empty_string=True, regex_pass=["^La loi"]), len(ref))
 
 if __name__ == '__main__':
+    create_regex_test_file(custom_path)
     unittest.main()
