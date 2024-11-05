@@ -2,10 +2,7 @@ import file_operations_lib
 import unittest
 import os
 
-from custom_files import create_regex_test_file, headers
-
-path: str = "./tests_files/DDHC.txt"
-custom_path: str = "./tests_files/custom.txt"
+from custom_files import create_regex_test_file, headers, path, custom_path
 
 if __name__ == '__main__':
     create_regex_test_file(custom_path)

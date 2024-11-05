@@ -2,7 +2,7 @@ import file_operations_lib
 import unittest
 import os
 
-path: str = "./tests_files/DDHC.txt"
+from custom_files import path
 
 def get_list(string: str) -> list:
     res: list = string.split("\n")

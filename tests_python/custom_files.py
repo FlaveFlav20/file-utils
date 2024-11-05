@@ -25,3 +25,6 @@ def create_regex_test_file(path: str) -> bool:
         return True
     except:
         return False
+
+path: str = "./tests_files/DDHC.txt"
+custom_path: str = "./tests_files/custom.txt"
