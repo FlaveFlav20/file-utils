@@ -1,4 +1,4 @@
-use file_operations_lib::with_eol::WithEOL;
+use file_utils_operations_lib::with_eol::WithEOL;
 use std::process::Command;
 
 fn cmp_vector(vec1: Vec<String>, vec2: Vec<String>) -> () {

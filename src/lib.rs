@@ -15,7 +15,7 @@ pub mod utils;
 
 ////
 #[pymodule]
-fn file_operations_lib(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn file_utils_operations_lib(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<WithEOL>()?;
     Ok(())
 }

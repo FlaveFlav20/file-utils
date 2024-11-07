@@ -1,4 +1,4 @@
-use file_operations_lib::with_eol::WithEOL;
+use file_utils_operations_lib::with_eol::WithEOL;
 use std::process::Command;
 
 fn convert_string_to_list(str: String) -> Vec<String> {

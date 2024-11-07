@@ -126,13 +126,13 @@ With **cat -e test.txt**:
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 n: int = 2 # Number of lines to read
 
 try:
-    head: list = file_operations_lib.WithEOL.head(path=path, n=n)
+    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=n)
     print(head)
 except:
     print("Unable to open/read the file")
@@ -147,13 +147,13 @@ Stdout:
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 n: int = 2 # Number of lines to read
 
 try:
-    tail: list = file_operations_lib.WithEOL.tail(path=path, n=n)
+    tail: list = file_utils_operations_lib.WithEOL.tail(path=path, n=n)
     print(tail)
 except:
     print("Unable to open/read the file")
@@ -168,14 +168,14 @@ Stdout:
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 n1: int = 2 # First line to read
 n2: int = 4 # Last line to read
 
 try:
-    between: list = file_operations_lib.WithEOL.between(path=path, n1=n1, n2=n2)
+    between: list = file_utils_operations_lib.WithEOL.between(path=path, n1=n1, n2=n2)
     print(between)
 except:
     print("Unable to open/read the file")
@@ -190,12 +190,12 @@ Stdout:
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 
 try:
-    between: list = file_operations_lib.WithEOL.parse(path=path)
+    between: list = file_utils_operations_lib.WithEOL.parse(path=path)
     print(between)
 except:
     print("Unable to open/read the file")
@@ -210,12 +210,12 @@ Stdout:
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 
 try:
-    between: list = file_operations_lib.WithEOL.count_lines(path=path)
+    between: list = file_utils_operations_lib.WithEOL.count_lines(path=path)
     print(between)
 except:
     print("Unable to open/read the file")
@@ -231,13 +231,13 @@ With **remove_empty_string** enable: \
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    tail: list = file_operations_lib.WithEOL.tail(path=path, n=n, remove_empty_string=True)
+    tail: list = file_utils_operations_lib.WithEOL.tail(path=path, n=n, remove_empty_string=True)
     print(tail)
 except:
     print("Unable to open/read the file")
@@ -251,13 +251,13 @@ With **remove_empty_string** disable (default option): \
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    tail: list = file_operations_lib.WithEOL.tail(path=path, n=n, remove_empty_string=False)
+    tail: list = file_utils_operations_lib.WithEOL.tail(path=path, n=n, remove_empty_string=False)
     print(tail)
 except:
     print("Unable to open/read the file")
@@ -272,13 +272,13 @@ Stdout:
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    head: list = file_operations_lib.WithEOL.head(path=path, n=n, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"])
+    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=n, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"])
     print(head)
 except:
     print("Unable to open/read the file")
@@ -295,13 +295,13 @@ Why tere is just 3 elements instead of 4? You should look at the **restrict** op
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    head: list = file_operations_lib.WithEOL.head(path=path, n=n, remove_empty_string=False, regex_pass=["\[Warning\]:*", "\[Error\]:*"])
+    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=n, remove_empty_string=False, regex_pass=["\[Warning\]:*", "\[Error\]:*"])
     print(head)
 except:
     print("Unable to open/read the file")
@@ -319,13 +319,13 @@ With **restrict** disable: \
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    head: list = file_operations_lib.WithEOL.head(path=path, n=4, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"], restrict=False)
+    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=4, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"], restrict=False)
     print(head)
 except:
     print("Unable to open/read the file")
@@ -339,13 +339,13 @@ With **restrict** enbale(default): \
 Code:
 ```py
 
-import file_operations_lib
+import file_utils_operations_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    head: list = file_operations_lib.WithEOL.head(path=path, n=4, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"], restrict=True)
+    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=4, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"], restrict=True)
     print(head)
 except:
     print("Unable to open/read the file")
