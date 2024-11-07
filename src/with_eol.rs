@@ -22,7 +22,12 @@ fn check_regex(to_check: &str, list_regex: &Vec<Regex>) -> bool {
     false
 }
 
-fn restrict_remove_tail(mut list: Vec<String>, list_index: Vec<usize>, count: usize, n: usize) -> Vec<String> {
+fn restrict_remove_tail(
+    mut list: Vec<String>,
+    list_index: Vec<usize>,
+    count: usize,
+    n: usize,
+) -> Vec<String> {
     for i in 0..list_index.len() {
         if count > n && list_index[i] < (count - n) {
             list.remove(0);
@@ -150,7 +155,7 @@ impl WithEOL {
             if result.len() == n {
                 result.remove(0);
             }
-            if restrict && restrict_index.len() == n{
+            if restrict && restrict_index.len() == n {
                 restrict_index.remove(0);
             }
             result.push(line.to_string());

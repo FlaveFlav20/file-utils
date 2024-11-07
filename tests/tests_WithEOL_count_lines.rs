@@ -44,12 +44,8 @@ mod tests_with_eol_count_lines {
 
         let count_ref: Vec<String> = convert_string_to_list(count_ref_str);
 
-        let check_count: usize = WithEOL::count_lines(
-            PATH.to_string(),
-            false,
-            Vec::new(),
-            Vec::new(),
-        );
+        let check_count: usize =
+            WithEOL::count_lines(PATH.to_string(), false, Vec::new(), Vec::new());
 
         assert_eq!(count_ref.len(), check_count);
     }

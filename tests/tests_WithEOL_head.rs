@@ -63,14 +63,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(
-            PATH.to_string(),
-            len,
-            false,
-            Vec::new(),
-            Vec::new(),
-            false,
-        );
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, false, Vec::new(), Vec::new(), false);
 
         cmp_vector(head_ref, check_head);
     }
@@ -98,14 +92,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(
-            PATH.to_string(),
-            len,
-            false,
-            Vec::new(),
-            Vec::new(),
-            false,
-        );
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, false, Vec::new(), Vec::new(), false);
         cmp_vector(head_ref, check_head);
     }
 
@@ -132,14 +120,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(
-            PATH.to_string(),
-            len,
-            false,
-            Vec::new(),
-            Vec::new(),
-            false,
-        );
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, false, Vec::new(), Vec::new(), false);
         cmp_vector(head_ref, check_head);
     }
 
@@ -166,14 +148,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(
-            PATH.to_string(),
-            len,
-            true,
-            Vec::new(),
-            Vec::new(),
-            false,
-        );
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, true, Vec::new(), Vec::new(), false);
         cmp_vector(head_ref, check_head);
     }
 
@@ -200,14 +176,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(
-            PATH.to_string(),
-            len,
-            true,
-            Vec::new(),
-            Vec::new(),
-            false,
-        );
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, true, Vec::new(), Vec::new(), false);
         cmp_vector(head_ref, check_head);
     }
 
@@ -234,14 +204,8 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
-        let check_head: Vec<String> = WithEOL::head(
-            PATH.to_string(),
-            len,
-            true,
-            Vec::new(),
-            Vec::new(),
-            false,
-        );
+        let check_head: Vec<String> =
+            WithEOL::head(PATH.to_string(), len, true, Vec::new(), Vec::new(), false);
 
         cmp_vector(head_ref, check_head);
     }
