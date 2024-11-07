@@ -1,10 +1,7 @@
 use pyo3::prelude::*;
 
 use regex::Regex;
-use std::collections::VecDeque;
 use std::fs::read_to_string;
-
-use crate::utils::convert_queue_to_vec;
 
 fn init_regex(list_str: Vec<String>) -> Vec<Regex> {
     let mut res: Vec<Regex> = Vec::new();
@@ -25,7 +22,7 @@ fn check_regex(to_check: &str, list_regex: &Vec<Regex>) -> bool {
     false
 }
 
-fn restrict_remove_tail(mut list: VecDeque<String>, list_index: VecDeque<usize>, count: usize, n: usize) -> VecDeque<String> {
+fn restrict_remove_tail(mut list: Vec<String>, list_index: Vec<usize>, count: usize, n: usize) -> Vec<String> {
     for i in 0..list_index.len() {
         if count > n && list_index[i] < (count - n) {
             list.remove(0);
@@ -131,13 +128,13 @@ impl WithEOL {
         regex_pass: Vec<String>,
         restrict: bool,
     ) -> Vec<String> {
-        let mut result: VecDeque<String> = VecDeque::with_capacity(n);
-        let mut restrict_index: VecDeque<usize> = VecDeque::with_capacity(n);
+        let mut result: Vec<String> = Vec::new();
+        let mut restrict_index: Vec<usize> = Vec::new();
         let re_keep: Vec<Regex> = init_regex(regex_keep);
         let re_pass: Vec<Regex> = init_regex(regex_pass);
 
         if n == 0 {
-            return convert_queue_to_vec(result);
+            return result;
         }
 
         let mut count: usize = 0;
@@ -152,17 +149,19 @@ impl WithEOL {
             }
             if result.len() == n {
                 result.remove(0);
+            }
+            if restrict && restrict_index.len() == n{
                 restrict_index.remove(0);
             }
-            result.push_back(line.to_string());
+            result.push(line.to_string());
             if restrict {
-                restrict_index.push_back(count);
+                restrict_index.push(count);
             }
         }
         if restrict {
             result = restrict_remove_tail(result, restrict_index, count, n);
         }
-        convert_queue_to_vec(result)
+        result
     }
 
     #[staticmethod]
