@@ -44,6 +44,8 @@ So, this package gives tools to easily read a file with efficiently. It's based 
 If we translate the rust into python, we'll have:
 ```py
 class WithEOL:
+    # head: Read the n first lines
+    # if n > (numbers of lines in the file) => return the whole file
     def head(path: str, n: int, \
                 remove_empty_string: bool = False, \
                 regex_keep: list = [] \
@@ -51,6 +53,9 @@ class WithEOL:
                 restrict: bool = True):
         ...
 
+    # between: Read the lines [n1, n2]
+    # if n1 > n2 => return an empty list
+    # if n1 > (numbers of lines in the file) => return an empty list
     def between(path: str, n1: int, n2: int \
                 remove_empty_string: bool = False, \
                 regex_keep: list = [] \
@@ -58,6 +63,8 @@ class WithEOL:
                 restrict: bool = True):
         ...
     
+    # tail: Read the n last lines
+    # if n > (numbers of lines in the file) => return the whole file
     def tail(path: str, n: int, \
                 remove_empty_string: bool = False, \
                 regex_keep: list = [] \
@@ -65,12 +72,14 @@ class WithEOL:
                 restrict: bool = True):
         ...
     
+    # parse: Read the whole file
     def parse(path: str, \ 
                 remove_empty_string: bool = False \
                 regex_keep: list = [] \
                 regex_pass: list = []):
         ...
 
+    # Count the number of lines
     def count_lines(path: str \
                     remove_empty_string: bool = False, \
                     regex_keep: list = [] \
@@ -111,7 +120,7 @@ With **cat -e test.txt**:
 [Warning]:Memory leaks$
  ```
 
-### Example-simple-head
+## Example-simple-head
 
 1\ Simple head (can be change to tail)
 Code:
@@ -133,9 +142,8 @@ Stdout:
 ['[Warning]:Entity not found', '[Error]:Unable to recover data']
 ```
 
-### Example-simple-tail
+## Example-simple-tail
 
-1\ Simple head (can be change to tail)
 Code:
 ```py
 
@@ -155,7 +163,7 @@ Stdout:
 ['[Info]:Indentation', '[Warning]:Memory leaks']
 ```
 
-### Example-simple-between
+## Example-simple-between
 
 Code:
 ```py
@@ -177,7 +185,7 @@ Stdout:
 ['[Error]:Unable to recover data', '[Info]:Segfault', '[Warning]:Indentation']
 ```
 
-### Example-simple-parse
+## Example-simple-parse
 
 Code:
 ```py
@@ -197,7 +205,7 @@ Stdout:
 ['[Warning]:Entity not found', '[Error]:Unable to recover data', '[Info]:Segfault', '[Warning]:Indentation', '[Error]:Memory leaks', '[Info]:Entity not found', '[Warning]:Unable to recover data', '  ', '[Error]:Segfault', '[Info]:Indentation', '[Warning]:Memory leaks']
 ```
 
-### Example-simple-count_lines
+## Example-simple-count_lines
 
 Code:
 ```py
@@ -217,7 +225,7 @@ Stdout:
 11
 ```
 
-### Example-remove_empty_string
+## Example-remove_empty_string
 
 With **remove_empty_string** enable: 
 Code:
@@ -259,7 +267,7 @@ Stdout:
 ['  ', '[Error]:Segfault', '[Info]:Indentation', '[Warning]:Memory leaks']
 ```
 
-### Example-regex_keep
+## Example-regex_keep
 
 Code:
 ```py
@@ -282,7 +290,7 @@ Stdout:
 
 Why tere is just 3 elements instead of 4? You should look at the **restrict** option
 
-### Example-regex_pass
+## Example-regex_pass
 
 Code:
 ```py
@@ -305,7 +313,7 @@ Stdout:
 
 Why tere is just 3 elements instead of 4? You should look at the **restrict** option
 
-### Example-restrict
+## Example-restrict
 
 With **restrict** disable:
 Code:
