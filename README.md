@@ -227,7 +227,7 @@ Stdout:
 
 ## Example-remove_empty_string
 
-With **remove_empty_string** enable: 
+With **remove_empty_string** enable: \
 Code:
 ```py
 
@@ -247,7 +247,7 @@ Stdout:
 ['[Warning]:Unable to recover data', '[Error]:Segfault', '[Info]:Indentation', '[Warning]:Memory leaks']
 ```
 
-With **remove_empty_string** disable (default option):
+With **remove_empty_string** disable (default option): \
 Code:
 ```py
 
@@ -315,7 +315,7 @@ Why tere is just 3 elements instead of 4? You should look at the **restrict** op
 
 ## Example-restrict
 
-With **restrict** disable:
+With **restrict** disable: \
 Code:
 ```py
 
@@ -335,7 +335,7 @@ Stdout:
 ['[Warning]:Entity not found', '[Error]:Unable to recover data', '[Warning]:Indentation', '[Error]:Memory leaks']
 ```
 
-With **restrict** enbale(default):
+With **restrict** enbale(default): \
 Code:
 ```py
 
