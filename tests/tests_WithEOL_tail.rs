@@ -1,31 +1,7 @@
 use file_utils_operations_lib::with_eol::WithEOL;
 use std::process::Command;
 
-fn cmp_vector(vec1: Vec<String>, vec2: Vec<String>) -> () {
-    assert_eq!(
-        vec1.len(),
-        vec2.len(),
-        "Not the same len, vec1.len() (ref): \"{}\"; vec2.len() (to test): \"{}\"",
-        vec1.len(),
-        vec2.len()
-    );
-
-    for i in 0..vec1.len() {
-        assert_eq!(
-            vec1[i], vec2[i],
-            "Not the same! i: {}; vec1[i] (ref): \"{}\"; vec2[i] (to test): \"{}\"",
-            i, vec1[i], vec2[i]
-        );
-    }
-}
-
-fn convert_string_to_list(str: String) -> Vec<String> {
-    let mut convert: Vec<String> = str.split('\n').map(|e| e.to_string()).collect();
-    if convert.len() == 1 && convert[0].is_empty() {
-        convert = Vec::new();
-    }
-    convert
-}
+use file_utils_operations_lib::utils::test_utils::{cmp_vector, convert_string_to_list};
 
 static PATH: &str = "./tests_files/DDHC.txt";
 

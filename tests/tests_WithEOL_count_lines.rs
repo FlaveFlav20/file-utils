@@ -1,20 +1,7 @@
 use file_utils_operations_lib::with_eol::WithEOL;
 use std::process::Command;
 
-fn convert_string_to_list(str: String) -> Vec<String> {
-    let mut convert: Vec<String> = str.split('\n').map(|e| e.to_string()).collect();
-    if convert.len() == 1 && convert[0] == "".to_string() {
-        convert = Vec::new();
-    }
-
-    /*
-        if we have "blablabla\n" the tail command return ["blablabla", ""], so we must remove it
-    */
-    if convert.len() > 1 && convert[convert.len() - 1].is_empty() {
-        convert.remove(convert.len() - 1);
-    }
-    convert
-}
+use file_utils_operations_lib::utils::test_utils::convert_string_to_list;
 
 static PATH: &str = "./tests_files/DDHC.txt";
 

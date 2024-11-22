@@ -288,7 +288,7 @@ Stdout:
 ['[Warning]:Entity not found', '[Error]:Unable to recover data', '[Warning]:Indentation']
 ```
 
-Why tere is just 3 elements instead of 4? You should look at the **restrict** option
+Why there is just 3 elements instead of 4? You should look at the **restrict** option
 
 ## Example-regex_pass
 
@@ -311,7 +311,7 @@ Stdout:
 ['[Info]:Segfault']
 ```
 
-Why tere is just 3 elements instead of 4? You should look at the **restrict** option
+Why there is just 3 elements instead of 4? You should look at the **restrict** option
 
 ## Example-restrict
 
