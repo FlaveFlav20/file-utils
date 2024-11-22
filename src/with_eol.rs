@@ -3,7 +3,7 @@ use pyo3::prelude::*;
 use regex::Regex;
 use std::fs::read_to_string;
 
-use crate::utils::utils::{init_regex, check_regex, restrict_remove_tail};
+use crate::utils::utils::{check_regex, init_regex, restrict_remove_tail};
 
 #[pyclass]
 pub struct WithEOL {}
