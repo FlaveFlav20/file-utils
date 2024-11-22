@@ -1,4 +1,4 @@
-use file_utils_operations_lib::with_eol::WithEOL;
+use file_utils_operations_lib::with_custom_delims::WithCustomDelims;
 use std::process::Command;
 
 use file_utils_operations_lib::utils::test_utils::{cmp_vector, convert_string_to_list};
@@ -32,8 +32,20 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
+        let mut delims: Vec<String> = Vec::new();
+        delims.push(String::from('\n'));
+
         let check_head: Vec<String> =
-            WithEOL::head(PATH.to_string(), len, false, Vec::new(), Vec::new(), false);
+            WithCustomDelims::head(PATH.to_string(), len, delims, false, Vec::new(), Vec::new(), false, 1024);
+
+        println!("red:");
+        for i in 0..head_ref.len() {
+            println!("{}:{}", i, head_ref[i]);
+        }
+        println!("My:");
+        for i in 0..check_head.len() {
+            println!("{}:{}", i, check_head[i]);
+        }
 
         cmp_vector(head_ref, check_head);
     }
@@ -61,8 +73,11 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
+        let mut delims: Vec<String> = Vec::new();
+        delims.push(String::from('\n'));
+
         let check_head: Vec<String> =
-            WithEOL::head(PATH.to_string(), len, false, Vec::new(), Vec::new(), false);
+            WithCustomDelims::head(PATH.to_string(), len, delims, false, Vec::new(), Vec::new(), false, 1024);
         cmp_vector(head_ref, check_head);
     }
 
@@ -89,10 +104,13 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
+        let mut delims: Vec<String> = Vec::new();
+        delims.push(String::from('\n'));
+
         let check_head: Vec<String> =
-            WithEOL::head(PATH.to_string(), len, false, Vec::new(), Vec::new(), false);
+            WithCustomDelims::head(PATH.to_string(), len, delims, false, Vec::new(), Vec::new(), false, 1024);
         cmp_vector(head_ref, check_head);
-    }
+    } 
 
     #[test]
     fn head_n_10_valid_remove_empty_string_true() {
@@ -117,8 +135,21 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
+        let mut delims: Vec<String> = Vec::new();
+        delims.push(String::from('\n'));
+
         let check_head: Vec<String> =
-            WithEOL::head(PATH.to_string(), len, true, Vec::new(), Vec::new(), false);
+            WithCustomDelims::head(PATH.to_string(), len, delims, true, Vec::new(), Vec::new(), false, 1024);
+
+        /*println!("Ref:");
+        for i in 0..head_ref.len() {
+            println!("{}", head_ref[i]);
+        }
+
+        println!("Get");
+        for i in 0..check_head.len() {
+            println!("{}", check_head[i]);
+        }*/
         cmp_vector(head_ref, check_head);
     }
 
@@ -145,8 +176,11 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
+        let mut delims: Vec<String> = Vec::new();
+        delims.push(String::from('\n'));
+
         let check_head: Vec<String> =
-            WithEOL::head(PATH.to_string(), len, true, Vec::new(), Vec::new(), false);
+            WithCustomDelims::head(PATH.to_string(), len, delims, true, Vec::new(), Vec::new(), false, 1024);
         cmp_vector(head_ref, check_head);
     }
 
@@ -173,8 +207,11 @@ mod tests_with_eol_head {
 
         let head_ref: Vec<String> = convert_string_to_list(head_ref_str);
 
+        let mut delims: Vec<String> = Vec::new();
+        delims.push(String::from('\n'));
+
         let check_head: Vec<String> =
-            WithEOL::head(PATH.to_string(), len, true, Vec::new(), Vec::new(), false);
+            WithCustomDelims::head(PATH.to_string(), len, delims, true, Vec::new(), Vec::new(), false, 1024);
 
         cmp_vector(head_ref, check_head);
     }
