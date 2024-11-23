@@ -6,7 +6,7 @@ use file_utils_operations_lib::utils::test_utils::convert_string_to_list;
 static PATH: &str = "./tests_files/DDHC.txt";
 
 #[cfg(test)]
-mod tests_with_custom_delim_eol_count_lines {
+mod tests_withcustomdelim_eol_count_lines {
     use super::*;
 
     #[test]
