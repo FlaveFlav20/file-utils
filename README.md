@@ -23,7 +23,8 @@ Examples:
         - [Example-restrict](#Example-restrict)
 - **WithCustomDelims**:
     - [How to use it?](#How-to-use-it)
-    - [What delim can be used?](#What-delim-can-be-used?)
+    - [What delim can be used?](#What-delim-can-be-used)
+    - [With more than one delimiter?](#With-more-than-one-delimiter)
 
 ## Intro
 
@@ -42,7 +43,10 @@ for line in f.readlines():
 - With the first one, there is a memory issue because you must save the entire file into a buffer. 
 - With the second one, there is a time issue because a loop can be very slow in python.
 
-So, this package gives tools to easily read a file with efficiently. It's based on Linux tools like **grep**, **sed**, **cat**, **head**, **tail** and tested with them.
+So, this package gives tools to easily read a file with efficiently. It's based on Linux tools like **grep**, **sed**, **cat**, **head**, **tail** and tested with them. \
+**WithEOL** class as the same memory problem as the first example. If you want to resolve it, you must use **WithCustomDelims** with the **"\n"** delimiter. \
+So, why I keep **WithEOL**? \
+**WithEOL** is helping me to test the code, it's using a built in rust function and I'm using it as a reference to compare with **WithCustomDelims**.
 
 ## Installation
 
@@ -258,8 +262,8 @@ import file_utils_operations_lib
 path: str = "my_path_to_file"
 
 try:
-    between: list = file_utils_operations_lib.WithEOL.parse(path=path)
-    print(between)
+    parse: list = file_utils_operations_lib.WithEOL.parse(path=path)
+    print(parse)
 except:
     print("Unable to open/read the file")
 ```
@@ -277,8 +281,8 @@ import file_utils_operations_lib
 path: str = "my_path_to_file"
 
 try:
-    between: list = file_utils_operations_lib.WithEOL.count_lines(path=path)
-    print(between)
+    count: list = file_utils_operations_lib.WithEOL.count_lines(path=path)
+    print(count)
 except:
     print("Unable to open/read the file")
 ```
@@ -453,7 +457,9 @@ Stdout:
 ['[Warning]:Entity not found', '[Error]:Unable to recover data']
 ```
 
-###What-delim-can-be-used?
+So, you use it as same as **WithEOL** but with a list of custom delimiter.
+
+### What-delim-can-be-used
 
 All string can be used like:
 - ";"
@@ -462,6 +468,35 @@ All string can be used like:
 - ::
 - "小六号"
 - "毫" 
+
+### With-more-than-one-delimiter
+
+If my file contains:
+```sh
+;À ;la ;;
+pêche éèaux moules, @moules, ::小六号moules::Je n'veux小六号 plus ::y 
+aller éèmaman小六号
+```
+
+We'll have with ";", "\n", "éè", "@", "小六号", "::"
+```py
+import file_utils_operations_lib
+
+path: str = "my_path_to_file"
+
+try:
+    parse: list = file_utils_operations_lib.WithCustomDelims.parse(path=path, delimiter=[";", "\n", "éè", "@", "::"])
+    print(parse)
+except:
+    print("Unable to open/read the file")
+```
+
+Stdout
+
+```sh
+['', 'À ', 'la ', '', '', 'pêche ', 'aux moules, ', 'moules, ', '', 'moules', "Je n'veux", ' plus ', 'y ', 'aller ', 'maman', '']
+```
+
 
 ## Structure
 
