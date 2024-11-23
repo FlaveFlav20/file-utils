@@ -69,6 +69,8 @@ impl ReadDelimiter {
                 ));
             }
 
+            // TO DO: check if invalid ascii follow
+
             chars.push(buffer);
         }
         if let Ok(valid_str) = std::str::from_utf8(&chars) {
@@ -108,15 +110,13 @@ impl ReadDelimiter {
                     .unwrap_or("");
 
                 if self.delimiter[i] == str {
-                    for _i in 0..self.delimiter[i].as_bytes().len() {
+                    for _i in 0..self.delimiter[i].chars().count() {
                         self.line.pop();
                     }
-                    println!("B:{}", self.line);
                     return Ok(true);
                 }
             }
         }
-        println!("Ha:{}", self.line);
         Ok(self.line.len() != 0)
     }
 
@@ -128,7 +128,6 @@ impl ReadDelimiter {
             };
 
             if bytes_read == 0 {
-                println!("Heu:{}:{}", self.buffer.len(), self.buffer[0]);
                 return Ok(0);
             }
 
