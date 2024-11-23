@@ -2,7 +2,11 @@ import os
 from pathlib import Path
 
 custom_path: str = os.path.join(Path(os.path.realpath(__file__)).parent, "..", "tests_files", "custom.txt")
+custom_path_delim: str = os.path.join(Path(os.path.realpath(__file__)).parent, "..", "tests_files", "custom_delim.txt")
 path: str = os.path.join(Path(os.path.realpath(__file__)).parent, "..", "tests_files", "DDHC.txt")
+path_delim: str = os.path.join(Path(os.path.realpath(__file__)).parent, "..", "tests_files", "DDHC_custom_delims.txt")
+custom_path_delim: str = os.path.join(Path(os.path.realpath(__file__)).parent, "..", "tests_files", "custom_delim.txt")
+delimiter: list = ["::", ":;", "|", "éè", "小六号", "毫"]
 
 warning: str = "[Warning]:"
 error: str = "[Error]:"
@@ -31,6 +35,31 @@ def create_regex_test_file(path: str) -> bool:
         return True
     except:
         return False
+
+def create_delim_test_file(ref_path: str, to_path: str):
+    delims: list = ["::", ":;", "|", "éè", "小六号", "毫"]
+    index: int = 0
+    try:
+        f_from = open(ref_path, "r")
+        f_target = open(to_path, "w")
+
+        content: str = f_from.read()
+        res: str = ""
+
+        for c in content:
+            if c == '\n':
+                res += delims[index]
+                index += 1
+                index = index % len(delims)
+            else:
+                res += c
+
+        f_target.write(res)
+
+        f_target.close()
+        f_from.close()
+    except:
+        return
 
 # get_list: string to list converter
 #   - args: a string -> output of a command

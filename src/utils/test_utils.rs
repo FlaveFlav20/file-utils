@@ -23,10 +23,22 @@ pub fn convert_string_to_list(str: String) -> Vec<String> {
     }
 
     /*
-        if we have "blablabla\n" the tail command return ["blablabla", ""], so we must remove it
+        if we have "blablabla\n" the tail command return ["blablabla", ""], so we must remove it because of sed command
     */
+
     if convert.len() > 1 && convert[convert.len() - 1].is_empty() {
         convert.remove(convert.len() - 1);
     }
     convert
+}
+
+pub fn get_custom_delims() -> Vec<String> {
+    let mut delims: Vec<String> = Vec::new();
+    delims.push(String::from("::"));
+    delims.push(String::from(":;"));
+    delims.push(String::from("|"));
+    delims.push(String::from("éè"));
+    delims.push(String::from("小六号"));
+    delims.push(String::from("毫"));
+    delims
 }
