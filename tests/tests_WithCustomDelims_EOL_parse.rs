@@ -19,7 +19,7 @@ mod tests_withcustomdelim_eol_parse {
             Command::new("sh")
                 .arg("-c")
                 .arg(("cat ".to_string() + PATH).to_string())
-                  .output()
+                .output()
                 .expect("failed to execute process")
         };
 

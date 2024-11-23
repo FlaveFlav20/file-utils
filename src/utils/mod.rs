@@ -1,5 +1,5 @@
+pub mod byte;
 pub mod non_ascii_char;
 pub mod read_delim;
 pub mod test_utils;
 pub mod utils;
-pub mod byte;
