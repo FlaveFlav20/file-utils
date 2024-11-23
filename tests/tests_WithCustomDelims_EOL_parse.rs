@@ -6,7 +6,7 @@ use file_utils_operations_lib::utils::test_utils::{cmp_vector, convert_string_to
 static PATH: &str = "./tests_files/DDHC.txt";
 
 #[cfg(test)]
-mod tests_with_custom_delim_eol_parse {
+mod tests_withcustomdelim_eol_parse {
     use super::*;
     #[test]
     fn parse_remove_empty_string_false_keep_regex_false_pass_when_regex_false() {
@@ -19,7 +19,7 @@ mod tests_with_custom_delim_eol_parse {
             Command::new("sh")
                 .arg("-c")
                 .arg(("cat ".to_string() + PATH).to_string())
-                .output()
+                  .output()
                 .expect("failed to execute process")
         };
 

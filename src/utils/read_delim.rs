@@ -36,7 +36,13 @@ impl ReadDelimiter {
     }
 
     fn read_non_ascii_char(&mut self, first_u8: u8) -> Result<(), std::io::Error> {
-        let size: usize = non_ascii_char::check_number_bytes_begin(first_u8);
+        let check_size: i8 = non_ascii_char::check_number_bytes_begin(first_u8);
+        if check_size <= 0 {
+            self.line.push('�');
+            println!("Not a valid character!");
+            return Ok(());
+        }
+        let size: usize = check_size as usize;
         let mut chars: Vec<u8> = Vec::new();
         chars.push(first_u8);
 
@@ -121,7 +127,6 @@ impl ReadDelimiter {
                 Err(_e) => panic!("[ReadDeliiter][read_from_buffer]: Error while reading file"),
             };
 
-            println!("Read: {}", bytes_read);
             if bytes_read == 0 {
                 println!("Heu:{}:{}", self.buffer.len(), self.buffer[0]);
                 return Ok(0);

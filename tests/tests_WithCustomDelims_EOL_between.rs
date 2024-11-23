@@ -6,7 +6,7 @@ use file_utils_operations_lib::utils::test_utils::{cmp_vector, convert_string_to
 static PATH: &str = "./tests_files/DDHC.txt";
 
 #[cfg(test)]
-mod tests_with_custom_delim_eol_between {
+mod tests_withcustomdelim_eol_between {
     use super::*;
 
     #[test]
