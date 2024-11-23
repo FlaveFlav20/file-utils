@@ -19,8 +19,7 @@ pub mod non_ascii_char {
     pub fn check_number_bytes_begin(c: u8) -> i8 {
         if (c & CHECK_NON_ASCII) != 0 && (byte::no(c) & SECOND_CHECK_NON_ASCII) != 0 {
             return 1;
-        }
-        else if c & CHECK_LEN_2 != 0 && (byte::no(c) & SECOND_CHECK_LEN_2) != 0 {
+        } else if c & CHECK_LEN_2 != 0 && (byte::no(c) & SECOND_CHECK_LEN_2) != 0 {
             return 2;
         } else if c & CHECK_LEN_3 != 0 && (byte::no(c) & SECOND_CHECK_LEN_3) != 0 {
             return 3;
