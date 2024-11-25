@@ -3,40 +3,7 @@ use pyo3::prelude::*;
 use regex::Regex;
 use std::fs::read_to_string;
 
-fn init_regex(list_str: Vec<String>) -> Vec<Regex> {
-    let mut res: Vec<Regex> = Vec::new();
-    if list_str.len() > 0 {
-        for i in 0..list_str.len() {
-            res.push(Regex::new(&list_str[i]).unwrap())
-        }
-    }
-    res
-}
-
-fn check_regex(to_check: &str, list_regex: &Vec<Regex>) -> bool {
-    for i in 0..list_regex.len() {
-        if list_regex[i].is_match(to_check) {
-            return true;
-        }
-    }
-    false
-}
-
-fn restrict_remove_tail(
-    mut list: Vec<String>,
-    list_index: Vec<usize>,
-    count: usize,
-    n: usize,
-) -> Vec<String> {
-    for i in 0..list_index.len() {
-        if count > n && list_index[i] < (count - n) {
-            list.remove(0);
-        } else {
-            break;
-        }
-    }
-    list
-}
+use crate::utils::utils::{check_regex, init_regex, restrict_remove_tail};
 
 #[pyclass]
 pub struct WithEOL {}
