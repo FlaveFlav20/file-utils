@@ -10,7 +10,7 @@
 - [Arguments-explaination](#Arguments-explaination)
 
 Examples:
-- **WithEOL python**:
+- **WithEOL: python**:
     - [Example-file](#Example-file)
     - Examples:
         - [Example-simple-head](#Example-simple-head-python)
@@ -22,12 +22,11 @@ Examples:
         - [Example-regex_keep](#Example-regex_keep-python)
         - [Example-regex_pass](#Example-regex_pass-python)
         - [Example-restrict](#Example-restrict-python)
-- **WithCustomDelims**:
+- **WithCustomDelims: python**:
     - [How to use it?](#How-to-use-it-python)
     - [What delim can be used?](#What-delim-can-be-used-python)
     - [With more than one delimiter?](#With-more-than-one-delimiter-python)
-
-
+- [How to use the rust crate?](#How-to-use-the-rust-crate?)
 
 - [Python class](#Python-class)
 - [Rust Structure](#Rust-Structure)
@@ -420,7 +419,7 @@ Stdout
 ['', 'À ', 'la ', '', '', 'pêche ', 'aux moules, ', 'moules, ', '', 'moules', "Je n'veux", ' plus ', 'y ', 'aller ', 'maman', '']
 ```
 
-## How-to-use-the-rust-code?
+## How-to-use-the-rust-crate?
 
 You must import the library with
 ```rs
