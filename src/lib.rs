@@ -1,5 +1,6 @@
 use pyo3::prelude::*;
 
+#[doc(hidden)]
 pub mod utils;
 
 pub mod with_eol;
