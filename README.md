@@ -1,9 +1,10 @@
-# file operations
+# file utils
 
 ## Table of contents
 
 - [Intro](#Intro)
 - [Installation](#Installation)
+- [Before starting](#Before-starting)
 - [Python class](#Python-class)
 - [Arguments-explaination](#Arguments-explaination)
 - [Structure](#Structure)
@@ -59,6 +60,10 @@ From source:
 ```sh
 maturin develop
 ```
+
+## Before-starting
+
+This package is ASCII/UTF-8 compliant, all others encoded files will not work...
 
 ## Python-class
 
