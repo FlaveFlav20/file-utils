@@ -8,6 +8,7 @@ repository = "https://github.com/FlaveFlav20/file-utils-operations"
 description = "This is a python library to parse files, it's giving tools to easily read a file with efficiency. It's based on linux commands like grep, sed, cat, head, tail and tested with them."
 keywords = ["head", "tail", "parse", "count_lines", "utf"]
 categories = ["filesystem"]
+exclude = ["tests_files/custom_delim.txt"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
