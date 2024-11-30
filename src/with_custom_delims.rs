@@ -2,8 +2,8 @@ use pyo3::prelude::*;
 
 use regex::Regex;
 
-use crate::utils::read_delim::ReadDelimiter;
 use crate::utils::utils::{check_regex, init_regex, restrict_remove_tail};
+use read_utf8::read_utf8_delims::ReadUTF8Delims;
 
 #[pyclass]
 pub struct WithCustomDelims {}
@@ -30,23 +30,23 @@ impl WithCustomDelims {
         let re_keep: Vec<Regex> = init_regex(regex_keep);
         let re_pass: Vec<Regex> = init_regex(regex_pass);
 
-        let mut read: ReadDelimiter = ReadDelimiter::new(path, delimiter, buffer_size)
+        let read: ReadUTF8Delims = ReadUTF8Delims::new(path, delimiter, None, Some(buffer_size))
             .expect("Unable to initialize delimiter");
 
         let mut count: usize = 0;
-        while read.read().expect("Unable to read delimiter") == true {
+        for line in read.into_iter() {
             count += 1;
-            if remove_empty_string && read.line.is_empty() {
+            if remove_empty_string && line.is_empty() {
                 continue;
-            } else if re_keep.len() > 0 && !check_regex(&read.line, &re_keep) {
+            } else if re_keep.len() > 0 && !check_regex(&line, &re_keep) {
                 continue;
-            } else if re_pass.len() > 0 && check_regex(&read.line, &re_pass) {
+            } else if re_pass.len() > 0 && check_regex(&line, &re_pass) {
                 continue;
             }
             if restrict && (count - 1) >= n {
                 break;
             }
-            result.push(read.line.to_string());
+            result.push(line.to_string());
             if result.len() >= n {
                 break;
             }
@@ -68,7 +68,7 @@ impl WithCustomDelims {
         buffer_size: usize,
     ) -> Vec<String> {
         let mut result: Vec<String> = Vec::new();
-        let mut read: ReadDelimiter = ReadDelimiter::new(path, delimiter, buffer_size)
+        let read: ReadUTF8Delims = ReadUTF8Delims::new(path, delimiter, None, Some(buffer_size))
             .expect("Unable to initialize delimiter");
 
         let re_keep: Vec<Regex> = init_regex(regex_keep);
@@ -77,13 +77,13 @@ impl WithCustomDelims {
         let mut count_lines: usize = 0;
         let mut count_elems: usize = 0;
 
-        while read.read().expect("Unable to read delimiter") == true {
+        for line in read.into_iter() {
             count_lines += 1;
-            if remove_empty_string && read.line.is_empty() {
+            if remove_empty_string && line.is_empty() {
                 continue;
-            } else if re_keep.len() > 0 && !check_regex(&read.line, &re_keep) {
+            } else if re_keep.len() > 0 && !check_regex(&line, &re_keep) {
                 continue;
-            } else if re_pass.len() > 0 && check_regex(&read.line, &re_pass) {
+            } else if re_pass.len() > 0 && check_regex(&line, &re_pass) {
                 continue;
             }
             count_elems += 1;
@@ -91,11 +91,11 @@ impl WithCustomDelims {
             if restrict && count_lines > n2 {
                 break;
             } else if restrict && count_lines >= n1 {
-                result.push(read.line.to_string());
+                result.push(line.to_string());
             } else if !restrict && count_elems > n2 {
                 break;
             } else if !restrict && count_elems >= n1 {
-                result.push(read.line.to_string());
+                result.push(line.to_string());
             }
         }
         result
@@ -122,17 +122,17 @@ impl WithCustomDelims {
             return result;
         }
 
-        let mut read: ReadDelimiter = ReadDelimiter::new(path, delimiter, buffer_size)
+        let read: ReadUTF8Delims = ReadUTF8Delims::new(path, delimiter, None, Some(buffer_size))
             .expect("Unable to initialize delimiter");
 
         let mut count: usize = 0;
-        while read.read().expect("Unable to read delimiter") == true {
+        for line in read.into_iter() {
             count += 1;
-            if remove_empty_string && read.line.to_string().trim().is_empty() {
+            if remove_empty_string && line.to_string().trim().is_empty() {
                 continue;
-            } else if re_keep.len() > 0 && !check_regex(&read.line, &re_keep) {
+            } else if re_keep.len() > 0 && !check_regex(&line, &re_keep) {
                 continue;
-            } else if re_pass.len() > 0 && check_regex(&read.line, &re_pass) {
+            } else if re_pass.len() > 0 && check_regex(&line, &re_pass) {
                 continue;
             }
             if result.len() == n {
@@ -141,7 +141,7 @@ impl WithCustomDelims {
             if restrict && restrict_index.len() == n {
                 restrict_index.remove(0);
             }
-            result.push(read.line.to_string());
+            result.push(line.to_string());
             if restrict {
                 restrict_index.push(count);
             }
@@ -166,18 +166,18 @@ impl WithCustomDelims {
         let re_keep: Vec<Regex> = init_regex(regex_keep);
         let re_pass: Vec<Regex> = init_regex(regex_pass);
 
-        let mut read: ReadDelimiter = ReadDelimiter::new(path, delimiter, buffer_size)
+        let read: ReadUTF8Delims = ReadUTF8Delims::new(path, delimiter, None, Some(buffer_size))
             .expect("Unable to initialize delimiter");
 
-        while read.read().expect("Unable to read delimiter") == true {
-            if remove_empty_string && read.line.is_empty() {
+        for line in read.into_iter() {
+            if remove_empty_string && line.is_empty() {
                 continue;
-            } else if re_keep.len() > 0 && !check_regex(&read.line, &re_keep) {
+            } else if re_keep.len() > 0 && !check_regex(&line, &re_keep) {
                 continue;
-            } else if re_pass.len() > 0 && check_regex(&read.line, &re_pass) {
+            } else if re_pass.len() > 0 && check_regex(&line, &re_pass) {
                 continue;
             }
-            result.push(read.line.to_string());
+            result.push(line.to_string());
         }
         result
     }
@@ -196,14 +196,14 @@ impl WithCustomDelims {
         let re_keep: Vec<Regex> = init_regex(regex_keep);
         let re_pass: Vec<Regex> = init_regex(regex_pass);
 
-        let mut read: ReadDelimiter = ReadDelimiter::new(path, delimiter, buffer_size)
+        let read: ReadUTF8Delims = ReadUTF8Delims::new(path, delimiter, None, Some(buffer_size))
             .expect("Unable to initialize delimiter");
-        while read.read().expect("Unable to read delimiter") == true {
-            if remove_empty_string && read.line.to_string().is_empty() {
+        for line in read.into_iter() {
+            if remove_empty_string && line.to_string().is_empty() {
                 continue;
-            } else if re_keep.len() > 0 && !check_regex(&read.line, &re_keep) {
+            } else if re_keep.len() > 0 && !check_regex(&line, &re_keep) {
                 continue;
-            } else if re_pass.len() > 0 && check_regex(&read.line, &re_pass) {
+            } else if re_pass.len() > 0 && check_regex(&line, &re_pass) {
                 continue;
             }
             res += 1;
