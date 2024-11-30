@@ -1,3 +1,7 @@
+//!
+//! It using the end of line to parse the file
+//!
+
 use pyo3::prelude::*;
 
 use regex::Regex;
@@ -6,10 +10,29 @@ use std::fs::read_to_string;
 use crate::utils::utils::{check_regex, init_regex, restrict_remove_tail};
 
 #[pyclass]
+///
+/// [WithEOL]: a simple structure to call functions (they are all static)
+///
 pub struct WithEOL {}
 
 #[pymethods]
 impl WithEOL {
+    ///
+    /// [WithEOL]\[head\]: take the first n lines. \
+    /// Arguments:
+    /// - path (mandatory): to the file
+    /// - n (mandatory): number of lines
+    /// - remove_empty_string (optional): remove all string that only contains
+    /// spaces
+    /// - regex_keep (optional): a list of regex to keep
+    /// - regex_pass (optional): a list of regex to pass
+    /// - restrict (optional): if enable, it will only take the first n lines.
+    /// If not, it will take the first n lines that can be taken (you can take
+    /// a look at the README to have further explaination)
+    ///
+    /// return:
+    /// - A list of string
+    ///
     #[staticmethod]
     #[pyo3(signature = (path, n, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
     pub fn head(
@@ -49,6 +72,23 @@ impl WithEOL {
         result
     }
 
+    ///
+    /// [WithEOL]\[between\]: take the lines between n1 and n2 \
+    /// Arguments:
+    /// - path (mandatory): to the file
+    /// - n1 (mandatory): the line begin
+    /// - n2 (mandatory): the line end
+    /// - remove_empty_string (optional): remove all string that only contains
+    /// spaces
+    /// - regex_keep (optional): a list of regex to keep
+    /// - regex_pass (optional): a list of regex to pass
+    /// - restrict (optional): if enable, it will only take the lines between
+    /// n1 and n2. If not, it will take the lines between n1 and n2 that can be
+    /// taken (you can take a look at the README to have further explaination)
+    ///
+    /// return:
+    /// - A list of string
+    ///
     #[staticmethod]
     #[pyo3(signature = (path, n1, n2, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
     pub fn between(
@@ -90,6 +130,22 @@ impl WithEOL {
         result
     }
 
+    ///
+    /// [WithEOL]\[tail\]: take the last n lines. \
+    /// Arguments:
+    /// - path (mandatory): to the file
+    /// - n (mandatory): number of lines
+    /// - remove_empty_string (optional): remove all string that only contains
+    /// spaces
+    /// - regex_keep (optional): a list of regex to keep
+    /// - regex_pass (optional): a list of regex to pass
+    /// - restrict (optional): if enable, it will only take the last n lines.
+    /// If not, it will take the last n lines that can be taken (you can take
+    /// a look at the README to have further explaination)
+    ///
+    /// return:
+    /// - A list of string
+    ///
     #[staticmethod]
     #[pyo3(signature = (path, n, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
     pub fn tail(
@@ -136,6 +192,18 @@ impl WithEOL {
         result
     }
 
+    ///
+    /// [WithEOL]\[parse\]: take the whole file \
+    /// Arguments:
+    /// - path (mandatory): to the file
+    /// - remove_empty_string (optional): remove all string that only contains
+    /// spaces
+    /// - regex_keep (optional): a list of regex to keep
+    /// - regex_pass (optional): a list of regex to pass
+    ///
+    /// return:
+    /// - A list of string
+    ///
     #[staticmethod]
     #[pyo3(signature = (path, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new()))]
     pub fn parse(
@@ -161,6 +229,18 @@ impl WithEOL {
         result
     }
 
+    ///
+    /// [WithEOL]\[parse\]: count the number of matched lines \
+    /// Arguments:
+    /// - path (mandatory): to the file
+    /// - remove_empty_string (optional): remove all string that only contains
+    /// spaces
+    /// - regex_keep (optional): a list of regex to keep
+    /// - regex_pass (optional): a list of regex to pass
+    ///
+    /// return:
+    /// - number of lines => usize
+    ///
     #[staticmethod]
     #[pyo3(signature = (path, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new()))]
     pub fn count_lines(

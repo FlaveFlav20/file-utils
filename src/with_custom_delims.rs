@@ -1,3 +1,7 @@
+//!
+//! It using a list of delimiters to parse the file
+//!
+
 use pyo3::prelude::*;
 
 use regex::Regex;
@@ -5,11 +9,31 @@ use regex::Regex;
 use crate::utils::utils::{check_regex, init_regex, restrict_remove_tail};
 use read_utf8::read_utf8_delims::ReadUTF8Delims;
 
+///
+/// [WithCustomDelims]: a simple structure to call functions (they are all static)
+///
 #[pyclass]
 pub struct WithCustomDelims {}
 
 #[pymethods]
 impl WithCustomDelims {
+    ///
+    /// [WithCustomDelims]\[head\]: take the first n lines. \
+    /// Arguments:
+    /// - path (mandatory): to the file
+    /// - n (mandatory): number of lines
+    /// - delimiter (mandatory): a list of custom delimiters
+    /// - remove_empty_string (optional): remove all string that only contains
+    /// spaces
+    /// - regex_keep (optional): a list of regex to keep
+    /// - regex_pass (optional): a list of regex to pass
+    /// - restrict (optional): if enable, it will only take the first n lines.
+    /// If not, it will take the first n lines that can be taken (you can take
+    /// a look at the README to have further explaination)
+    ///
+    /// return:
+    /// - A list of string
+    ///
     #[staticmethod]
     #[pyo3(signature = (path, n, delimiter, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true, buffer_size=1024))]
     pub fn head(
@@ -54,6 +78,24 @@ impl WithCustomDelims {
         result
     }
 
+    ///
+    /// [WithCustomDelims]\[between\]: take the lines between n1 and n2 \
+    /// Arguments:
+    /// - path (mandatory): to the file
+    /// - n1 (mandatory): the line begin
+    /// - n2 (mandatory): the line end
+    /// - delimiter (mandatory): a list of custom delimiters
+    /// - remove_empty_string (optional): remove all string that only contains
+    /// spaces
+    /// - regex_keep (optional): a list of regex to keep
+    /// - regex_pass (optional): a list of regex to pass
+    /// - restrict (optional): if enable, it will only take the lines between
+    /// n1 and n2. If not, it will take the lines between n1 and n2 that can be
+    /// taken (you can take a look at the README to have further explaination)
+    ///
+    /// return:
+    /// - A list of string
+    ///
     #[staticmethod]
     #[pyo3(signature = (path, n1, n2, delimiter, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict = true, buffer_size = 1024))]
     pub fn between(
@@ -101,6 +143,23 @@ impl WithCustomDelims {
         result
     }
 
+    ///
+    /// [WithCustomDelims]\[tail\]: take the last n lines. \
+    /// Arguments:
+    /// - path (mandatory): to the file
+    /// - n (mandatory): number of lines
+    /// - delimiter (mandatory): a list of custom delimiters
+    /// - remove_empty_string (optional): remove all string that only contains
+    /// spaces
+    /// - regex_keep (optional): a list of regex to keep
+    /// - regex_pass (optional): a list of regex to pass
+    /// - restrict (optional): if enable, it will only take the last n lines.
+    /// If not, it will take the last n lines that can be taken (you can take
+    /// a look at the README to have further explaination)
+    ///
+    /// return:
+    /// - A list of string
+    ///
     #[staticmethod]
     #[pyo3(signature = (path, n, delimiter, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict = true, buffer_size = 1024))]
     pub fn tail(
@@ -152,6 +211,19 @@ impl WithCustomDelims {
         result
     }
 
+    ///
+    /// [WithCustomDelims]\[parse\]: take the whole file \
+    /// Arguments:
+    /// - path (mandatory): to the file
+    /// - delimiter (mandatory): a list of custom delimiters
+    /// - remove_empty_string (optional): remove all string that only contains
+    /// spaces
+    /// - regex_keep (optional): a list of regex to keep
+    /// - regex_pass (optional): a list of regex to pass
+    ///
+    /// return:
+    /// - A list of string
+    ///
     #[staticmethod]
     #[pyo3(signature = (path, delimiter, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), buffer_size = 1024))]
     pub fn parse(
@@ -182,6 +254,19 @@ impl WithCustomDelims {
         result
     }
 
+    ///
+    /// [WithCustomDelims]\[parse\]: count the number of matched lines \
+    /// Arguments:
+    /// - path (mandatory): to the file
+    /// - delimiter (mandatory): a list of custom delimiters
+    /// - remove_empty_string (optional): remove all string that only contains
+    /// spaces
+    /// - regex_keep (optional): a list of regex to keep
+    /// - regex_pass (optional): a list of regex to pass
+    ///
+    /// return:
+    /// - number of lines => usize
+    ///
     #[staticmethod]
     #[pyo3(signature = (path, delimiter, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), buffer_size = 1024))]
     pub fn count_lines(
