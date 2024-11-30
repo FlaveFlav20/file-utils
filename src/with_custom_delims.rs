@@ -33,6 +33,7 @@ impl WithCustomDelims {
     /// take the first n lines. If not, it will take the first n lines that
     /// can be taken (you can take a look at the README to have further
     /// explaination)
+    /// - buffer_size(1024 by default in python): the buffer read size
     ///
     /// Return:
     /// - A list of string
@@ -98,6 +99,7 @@ impl WithCustomDelims {
     /// take the lines between n1 and n2. If not, it will take the lines
     /// between n1 and n2 that can be taken (you can take a look at the
     /// README to have further explaination)
+    /// - buffer_size(1024 by default in python): the buffer read size
     ///
     /// Return:
     /// - A list of string
@@ -165,6 +167,7 @@ impl WithCustomDelims {
     /// take the last n lines. If not, it will take the last n lines that can
     /// be taken (you can take a look at the README to have further
     /// explaination)
+    /// - buffer_size(1024 by default in python): the buffer read size
     ///
     /// Return:
     /// - A list of string
@@ -231,6 +234,7 @@ impl WithCustomDelims {
     /// you don't want this parameters
     /// - regex_pass: a list of regex to pass => put Vec::new() if
     /// you don't want this parameters
+    /// - buffer_size(1024 by default in python): the buffer read size
     ///
     /// Return:
     /// - A list of string
@@ -276,6 +280,7 @@ impl WithCustomDelims {
     /// you don't want this parameters
     /// - regex_pass: a list of regex to pass => put Vec::new() if
     /// you don't want this parameters
+    /// - buffer_size(1024 by default in python): the buffer read size
     ///
     /// Return:
     /// - number of lines => usize
