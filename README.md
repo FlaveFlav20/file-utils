@@ -27,6 +27,8 @@ Examples:
     - [What delim can be used?](#What-delim-can-be-used-python)
     - [With more than one delimiter?](#With-more-than-one-delimiter-python)
 
+
+
 - [Python class](#Python-class)
 - [Rust Structure](#Rust-Structure)
 - [Structure](#Structure)
@@ -418,6 +420,52 @@ Stdout
 ['', 'À ', 'la ', '', '', 'pêche ', 'aux moules, ', 'moules, ', '', 'moules', "Je n'veux", ' plus ', 'y ', 'aller ', 'maman', '']
 ```
 
+## How-to-use-the-rust-code?
+
+You must import the library with
+```rs
+use file_utils_operations_lib::with_custom_delims::WithCustomDelims;
+```
+or
+```rs
+use file_utils_operations_lib::with_eol::WithEOL;
+```
+
+Then, you can use the same functions as python because there are the same behavious. \
+Example:
+```rs
+use file_utils_operations_lib::with_custom_delims::WithCustomDelims;
+
+fn main() {
+    let mut delimiters: Vec<String> = Vec::new();
+    delimiters.push("\n".to_string());
+    let n: usize = 10;
+    let res: Vec<String> = WithCustomDelims::head(
+        "my path".to_string(),
+        n,
+        delimiters,
+        false,
+        Vec::new(),
+        Vec::new(),
+        true,
+        1024,
+    );
+}
+```
+has the same behaviour as
+```rs
+import file_utils_operations_lib
+
+path: str = "my_path_to_file"
+n: int = 2 # Number of lines to read
+
+try:
+    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=n)
+    print(head)
+except:
+    print("Unable to open/read the file")
+```
+
 ## Python-class
 
 If we translate the rust into python, we'll have:
@@ -516,286 +564,7 @@ class WithCustomDelims:
 
 ## Rust-Structure
 
-```rs
-...
-impl WithEOL {
-    ///
-    /// [WithEOL]\[head\]: take the first n lines. \
-    /// Arguments:
-    /// - path (mandatory): to the file
-    /// - n (mandatory): number of lines
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// - restrict (optional): if enable, it will only take the first n lines.
-    /// If not, it will take the first n lines that can be taken (you can take
-    /// a look at the README to have further explaination)
-    /// 
-    /// return:
-    /// - A list of string 
-    /// 
-    pub fn head(
-        path: String,
-        n: usize,
-        remove_empty_string: bool,
-        regex_keep: Vec<String>,
-        regex_pass: Vec<String>,
-        restrict: bool,
-    ) -> Vec<String> {
-        ...
-    }
-
-    ///
-    /// [WithEOL]\[between\]: take the lines between n1 and n2 \
-    /// Arguments:
-    /// - path (mandatory): to the file
-    /// - n1 (mandatory): the line begin
-    /// - n2 (mandatory): the line end
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// - restrict (optional): if enable, it will only take the lines between 
-    /// n1 and n2. If not, it will take the lines between n1 and n2 that can be
-    /// taken (you can take a look at the README to have further explaination) 
-    /// 
-    /// return:
-    /// - A list of string 
-    /// 
-    pub fn between(
-        path: String,
-        n1: usize,
-        n2: usize,
-        remove_empty_string: bool,
-        regex_keep: Vec<String>,
-        regex_pass: Vec<String>,
-        restrict: bool,
-    ) -> Vec<String> {
-        ...
-    }
-
-    ///
-    /// [WithEOL]\[tail\]: take the last n lines. \
-    /// Arguments:
-    /// - path (mandatory): to the file
-    /// - n (mandatory): number of lines
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// - restrict (optional): if enable, it will only take the last n lines.
-    /// If not, it will take the last n lines that can be taken (you can take
-    /// a look at the README to have further explaination)
-    /// 
-    /// return:
-    /// - A list of string 
-    /// 
-    pub fn tail(
-        path: String,
-        n: usize,
-        remove_empty_string: bool,
-        regex_keep: Vec<String>,
-        regex_pass: Vec<String>,
-        restrict: bool,
-    ) -> Vec<String> {
-        ...
-    }
-
-    ///
-    /// [WithEOL]\[parse\]: take the whole file \
-    /// Arguments:
-    /// - path (mandatory): to the file
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// 
-    /// return:
-    /// - A list of string 
-    /// 
-    pub fn parse(
-        path: String,
-        remove_empty_string: bool,
-        regex_keep: Vec<String>,
-        regex_pass: Vec<String>,
-    ) -> Vec<String> {
-        ...
-    }
-
-    ///
-    /// [WithEOL]\[parse\]: count the number of matched lines \
-    /// Arguments:
-    /// - path (mandatory): to the file
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// 
-    /// return:
-    /// - number of lines => usize
-    ///
-    pub fn count_lines(
-        path: String,
-        remove_empty_string: bool,
-        regex_keep: Vec<String>,
-        regex_pass: Vec<String>,
-    ) -> usize {
-        ...
-    }
-}
-```
-
-```rs
-...
-impl WithCustomDelims {
-    ///
-    /// [WithCustomDelims]\[head\]: take the first n lines. \
-    /// Arguments:
-    /// - path (mandatory): to the file
-    /// - n (mandatory): number of lines
-    /// - delimiter (mandatory): a list of custom delimiters
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// - restrict (optional): if enable, it will only take the first n lines.
-    /// If not, it will take the first n lines that can be taken (you can take
-    /// a look at the README to have further explaination)
-    /// 
-    /// return:
-    /// - A list of string 
-    /// 
-    pub fn head(
-        path: String,
-        n: usize,
-        delimiter: Vec<String>,
-        remove_empty_string: bool,
-        regex_keep: Vec<String>,
-        regex_pass: Vec<String>,
-        restrict: bool,
-        buffer_size: usize,
-    ) -> Vec<String> {
-        ...
-    }
-
-    ///
-    /// [WithCustomDelims]\[between\]: take the lines between n1 and n2 \
-    /// Arguments:
-    /// - path (mandatory): to the file
-    /// - n1 (mandatory): the line begin
-    /// - n2 (mandatory): the line end
-    /// - delimiter (mandatory): a list of custom delimiters
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// - restrict (optional): if enable, it will only take the lines between 
-    /// n1 and n2. If not, it will take the lines between n1 and n2 that can be
-    /// taken (you can take a look at the README to have further explaination) 
-    /// 
-    /// return:
-    /// - A list of string 
-    /// 
-    pub fn between(
-        path: String,
-        n1: usize,
-        n2: usize,
-        delimiter: Vec<String>,
-        remove_empty_string: bool,
-        regex_keep: Vec<String>,
-        regex_pass: Vec<String>,
-        restrict: bool,
-        buffer_size: usize,
-    ) -> Vec<String> {
-        ...
-    }
-
-    ///
-    /// [WithCustomDelims]\[tail\]: take the last n lines. \
-    /// Arguments:
-    /// - path (mandatory): to the file
-    /// - n (mandatory): number of lines
-    /// - delimiter (mandatory): a list of custom delimiters
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// - restrict (optional): if enable, it will only take the last n lines.
-    /// If not, it will take the last n lines that can be taken (you can take
-    /// a look at the README to have further explaination)
-    /// 
-    /// return:
-    /// - A list of string 
-    /// 
-    #[staticmethod]
-    #[pyo3(signature = (path, n, delimiter, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict = true, buffer_size = 1024))]
-    pub fn tail(
-        path: String,
-        n: usize,
-        delimiter: Vec<String>,
-        remove_empty_string: bool,
-        regex_keep: Vec<String>,
-        regex_pass: Vec<String>,
-        restrict: bool,
-        buffer_size: usize,
-    ) -> Vec<String> {
-        ...
-    }
-
-    ///
-    /// [WithCustomDelims]\[parse\]: take the whole file \
-    /// Arguments:
-    /// - path (mandatory): to the file
-    /// - delimiter (mandatory): a list of custom delimiters
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// 
-    /// return:
-    /// - A list of string 
-    /// 
-    #[staticmethod]
-    #[pyo3(signature = (path, delimiter, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), buffer_size = 1024))]
-    pub fn parse(
-        path: String,
-        delimiter: Vec<String>,
-        remove_empty_string: bool,
-        regex_keep: Vec<String>,
-        regex_pass: Vec<String>,
-        buffer_size: usize,
-    ) -> Vec<String> {
-        ...
-    }
-
-    ///
-    /// [WithCustomDelims]\[parse\]: count the number of matched lines \
-    /// Arguments:
-    /// - path (mandatory): to the file
-    /// - delimiter (mandatory): a list of custom delimiters
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// 
-    /// return:
-    /// - number of lines => usize
-    ///
-    pub fn count_lines(
-        path: String,
-        delimiter: Vec<String>,
-        remove_empty_string: bool,
-        regex_keep: Vec<String>,
-        regex_pass: Vec<String>,
-        buffer_size: usize,
-    ) -> usize {
-        ...
-    }
-...
-}
-
-```
+Take a look at [https://docs.rs/file_utils_operations/latest/file_utils_operations_lib/](https://docs.rs/file_utils_operations/latest/file_utils_operations_lib/)
 
 ## Structure
 

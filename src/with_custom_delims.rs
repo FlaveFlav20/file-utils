@@ -20,18 +20,21 @@ impl WithCustomDelims {
     ///
     /// [WithCustomDelims]\[head\]: take the first n lines. \
     /// Arguments:
-    /// - path (mandatory): to the file
-    /// - n (mandatory): number of lines
-    /// - delimiter (mandatory): a list of custom delimiters
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// - restrict (optional): if enable, it will only take the first n lines.
-    /// If not, it will take the first n lines that can be taken (you can take
-    /// a look at the README to have further explaination)
+    /// - path: to the file
+    /// - n: number of lines
+    /// - delimiter: a list of custom delimiters
+    /// - remove_empty_string (false by default in python code):: remove all
+    /// string that only contains spaces
+    /// - regex_keep: a list of regex to keep => put Vec::new() if
+    /// you don't want this parameters
+    /// - regex_pass: a list of regex to pass => put Vec::new() if
+    /// you don't want this parameters
+    /// - restrict(true by default in python code): if enable, it will only
+    /// take the first n lines. If not, it will take the first n lines that
+    /// can be taken (you can take a look at the README to have further
+    /// explaination)
     ///
-    /// return:
+    /// Return:
     /// - A list of string
     ///
     #[staticmethod]
@@ -81,19 +84,22 @@ impl WithCustomDelims {
     ///
     /// [WithCustomDelims]\[between\]: take the lines between n1 and n2 \
     /// Arguments:
-    /// - path (mandatory): to the file
-    /// - n1 (mandatory): the line begin
-    /// - n2 (mandatory): the line end
-    /// - delimiter (mandatory): a list of custom delimiters
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// - restrict (optional): if enable, it will only take the lines between
-    /// n1 and n2. If not, it will take the lines between n1 and n2 that can be
-    /// taken (you can take a look at the README to have further explaination)
+    /// - path: to the file
+    /// - n1: the line begin
+    /// - n2: the line end
+    /// - delimiter: a list of custom delimiters
+    /// - remove_empty_string (false by default in python code):: remove all
+    /// string that only contains spaces
+    /// - regex_keep: a list of regex to keep => put Vec::new() if
+    /// you don't want this parameters
+    /// - regex_pass: a list of regex to pass => put Vec::new() if
+    /// you don't want this parameters
+    /// - restrict(true by default in python code): if enable, it will only
+    /// take the lines between n1 and n2. If not, it will take the lines
+    /// between n1 and n2 that can be taken (you can take a look at the
+    /// README to have further explaination)
     ///
-    /// return:
+    /// Return:
     /// - A list of string
     ///
     #[staticmethod]
@@ -146,18 +152,21 @@ impl WithCustomDelims {
     ///
     /// [WithCustomDelims]\[tail\]: take the last n lines. \
     /// Arguments:
-    /// - path (mandatory): to the file
-    /// - n (mandatory): number of lines
-    /// - delimiter (mandatory): a list of custom delimiters
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
-    /// - restrict (optional): if enable, it will only take the last n lines.
-    /// If not, it will take the last n lines that can be taken (you can take
-    /// a look at the README to have further explaination)
+    /// - path: to the file
+    /// - n: number of lines
+    /// - delimiter: a list of custom delimiters
+    /// - remove_empty_string (false by default in python code):: remove all
+    /// string that only contains spaces
+    /// - regex_keep: a list of regex to keep => put Vec::new() if
+    /// you don't want this parameters
+    /// - regex_pass: a list of regex to pass => put Vec::new() if
+    /// you don't want this parameters
+    /// - restrict(true by default in python code): if enable, it will only
+    /// take the last n lines. If not, it will take the last n lines that can
+    /// be taken (you can take a look at the README to have further
+    /// explaination)
     ///
-    /// return:
+    /// Return:
     /// - A list of string
     ///
     #[staticmethod]
@@ -214,14 +223,16 @@ impl WithCustomDelims {
     ///
     /// [WithCustomDelims]\[parse\]: take the whole file \
     /// Arguments:
-    /// - path (mandatory): to the file
-    /// - delimiter (mandatory): a list of custom delimiters
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
+    /// - path: to the file
+    /// - delimiter: a list of custom delimiters
+    /// - remove_empty_string (false by default in python code):: remove all
+    /// string that only contains spaces
+    /// - regex_keep: a list of regex to keep => put Vec::new() if
+    /// you don't want this parameters
+    /// - regex_pass: a list of regex to pass => put Vec::new() if
+    /// you don't want this parameters
     ///
-    /// return:
+    /// Return:
     /// - A list of string
     ///
     #[staticmethod]
@@ -257,14 +268,16 @@ impl WithCustomDelims {
     ///
     /// [WithCustomDelims]\[parse\]: count the number of matched lines \
     /// Arguments:
-    /// - path (mandatory): to the file
-    /// - delimiter (mandatory): a list of custom delimiters
-    /// - remove_empty_string (optional): remove all string that only contains
-    /// spaces
-    /// - regex_keep (optional): a list of regex to keep
-    /// - regex_pass (optional): a list of regex to pass
+    /// - path: to the file
+    /// - delimiter: a list of custom delimiters
+    /// - remove_empty_string (false by default in python code):: remove all
+    /// string that only contains spaces
+    /// - regex_keep: a list of regex to keep => put Vec::new() if
+    /// you don't want this parameters
+    /// - regex_pass: a list of regex to pass => put Vec::new() if
+    /// you don't want this parameters
     ///
-    /// return:
+    /// Return:
     /// - number of lines => usize
     ///
     #[staticmethod]
