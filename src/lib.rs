@@ -11,7 +11,7 @@ pub mod with_custom_delims;
 
 ////
 #[pymodule]
-fn file_utils_operations_lib(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn file_utils_lib(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<WithEOL>()?;
     m.add_class::<WithCustomDelims>()?;
     Ok(())

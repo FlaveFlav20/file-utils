@@ -1,4 +1,4 @@
-import file_utils_operations_lib
+import file_utils_lib
 import unittest
 import os
 
@@ -21,42 +21,42 @@ class TestWithCustomDelimCountLines(unittest.TestCase):
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.count_lines(path=path_delim,delimiter=delimiter), len(ref))
+        self.assertEqual(file_utils_lib.WithCustomDelims.count_lines(path=path_delim,delimiter=delimiter), len(ref))
     
     def test_remove_empty_lines(self):
         file = os.popen("sed '/^$/d' " + path)
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.count_lines(path=path_delim, delimiter=delimiter, remove_empty_string=True), len(ref))
+        self.assertEqual(file_utils_lib.WithCustomDelims.count_lines(path=path_delim, delimiter=delimiter, remove_empty_string=True), len(ref))
     
     def test_keep_regex(self):
         file = os.popen("grep \"^La loi\" " + path)
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.count_lines(path=path_delim, delimiter=delimiter, remove_empty_string=False, regex_keep=["^La loi"]), len(ref))
+        self.assertEqual(file_utils_lib.WithCustomDelims.count_lines(path=path_delim, delimiter=delimiter, remove_empty_string=False, regex_keep=["^La loi"]), len(ref))
     
     def test_remove_empty_lines_keep_regex(self):
         file = os.popen("sed '/^$/d' " + path + " | grep \"^La loi\" ")
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.count_lines(path=path_delim, delimiter=delimiter, remove_empty_string=True, regex_keep=["^La loi"]), len(ref))
+        self.assertEqual(file_utils_lib.WithCustomDelims.count_lines(path=path_delim, delimiter=delimiter, remove_empty_string=True, regex_keep=["^La loi"]), len(ref))
     
     def test_pass_regex(self):
         file = os.popen("grep -v \"^La loi\" " + path)
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.count_lines(path=path_delim, delimiter=delimiter, remove_empty_string=False, regex_pass=["^La loi"]), len(ref))
+        self.assertEqual(file_utils_lib.WithCustomDelims.count_lines(path=path_delim, delimiter=delimiter, remove_empty_string=False, regex_pass=["^La loi"]), len(ref))
 
     def test_remove_empty_lines_pass_regex(self):
         file = os.popen("sed '/^$/d' " + path + " | grep -v \"^La loi\" ")
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.count_lines(path=path_delim, delimiter=delimiter, remove_empty_string=True, regex_pass=["^La loi"]), len(ref))
+        self.assertEqual(file_utils_lib.WithCustomDelims.count_lines(path=path_delim, delimiter=delimiter, remove_empty_string=True, regex_pass=["^La loi"]), len(ref))
 
 if __name__ == '__main__':
     create_delim_test_file(path, path_delim)

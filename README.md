@@ -50,7 +50,9 @@ for line in f.readlines():
 - With the second one, there is a time issue because a loop can be very slow in python.
 
 So, this package gives tools to easily read a file with efficiently. It's based on Linux tools like **grep**, **sed**, **cat**, **head**, **tail** and tested with them. \
-**WithEOL** is helping me to test the code, it's using a built in rust function and I'm using it as a reference to compare with **WithCustomDelims**.**WithCustomDelims** is also a self implemented structure, and there can be bugs associated with it.
+**WithEOL** class as the same memory problem as the first example. If you want to resolve it, you must use **WithCustomDelims** with the **"\n"** delimiter. \
+So, why I keep **WithEOL**? \
+**WithEOL** is helping me to test the code, it's using a built in rust function and I'm using it as a reference to compare with **WithCustomDelims**.
 
 ## Installation
 

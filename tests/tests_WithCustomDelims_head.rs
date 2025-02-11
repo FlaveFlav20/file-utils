@@ -1,7 +1,7 @@
-use file_utils_operations_lib::with_custom_delims::WithCustomDelims;
+use file_utils_lib::with_custom_delims::WithCustomDelims;
 use std::process::Command;
 
-use file_utils_operations_lib::utils::test_utils::{
+use file_utils_lib::utils::test_utils::{
     cmp_vector, convert_string_to_list, get_custom_delims,
 };
 
