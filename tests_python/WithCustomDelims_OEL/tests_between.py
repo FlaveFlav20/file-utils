@@ -1,4 +1,4 @@
-import file_utils_operations_lib
+import file_utils_lib
 import unittest
 import os
 
@@ -17,14 +17,14 @@ class TestWithCustomDelimEOFBetween(unittest.TestCase):
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False), ref)
+        self.assertEqual(file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False), ref)
 
     def test_between_n1_2_n2_1_valid_remove_empty_string_false(self):
         n1: int = 2
         n2: int = 1
         res: str= ""
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False), ref)
+        self.assertEqual(file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False), ref)
 
     def test_between_n1_1_n2_2_valid_remove_empty_string_false(self):
         n1: int = 1
@@ -33,14 +33,14 @@ class TestWithCustomDelimEOFBetween(unittest.TestCase):
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False), ref)
+        self.assertEqual(file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False), ref)
 
     def test_between_n1_neg_n2_pos_invalid_remove_empty_string_false(self):
         check_pass: bool = True 
         n1: int = -1
         n2: int = 1
         try:
-            file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False)
+            file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False)
         except:
             check_pass = False
         if check_pass:
@@ -51,7 +51,7 @@ class TestWithCustomDelimEOFBetween(unittest.TestCase):
         n1: int = 1
         n2: int = -1
         try:
-            file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False)
+            file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False)
         except:
             check_pass = False
         if check_pass:
@@ -62,7 +62,7 @@ class TestWithCustomDelimEOFBetween(unittest.TestCase):
         n1: int = -1
         n2: int = -1
         try:
-            file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False)
+            file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], restrict=False)
         except:
             check_pass = False
         if check_pass:
@@ -77,14 +77,14 @@ class TestWithCustomDelimEOFBetween(unittest.TestCase):
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False), ref)
+        self.assertEqual(file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False), ref)
 
     def test_between_n1_2_n2_1_valid_remove_empty_string_true(self):
         n1: int = 2
         n2: int = 1
         res: str= ""
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False), ref)
+        self.assertEqual(file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False), ref)
 
     def test_between_n1_1_n2_2_valid_remove_empty_string_true(self):
         n1: int = 1
@@ -93,14 +93,14 @@ class TestWithCustomDelimEOFBetween(unittest.TestCase):
         res: str= file.read()
         file.close()
         ref: list = get_list(res)
-        self.assertEqual(file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False), ref)
+        self.assertEqual(file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False), ref)
 
     def test_between_n1_neg_n2_pos_invalid_remove_empty_string_true(self):
         check_pass: bool = True 
         n1: int = -1
         n2: int = 1
         try:
-            file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False)
+            file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False)
         except:
             check_pass = False
         if check_pass:
@@ -111,7 +111,7 @@ class TestWithCustomDelimEOFBetween(unittest.TestCase):
         n1: int = 1
         n2: int = -1
         try:
-            file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False)
+            file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False)
         except:
             check_pass = False
         if check_pass:
@@ -122,7 +122,7 @@ class TestWithCustomDelimEOFBetween(unittest.TestCase):
         n1: int = -1
         n2: int = -1
         try:
-            file_utils_operations_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False)
+            file_utils_lib.WithCustomDelims.between(path=path, n1=n1, n2=n2, delimiter=['\n'], remove_empty_string=True, restrict=False)
         except:
             check_pass = False
         if check_pass:
