@@ -1,7 +1,7 @@
-use file_utils_operations_lib::with_eol::WithEOL;
+use file_utils_lib::with_eol::WithEOL;
 use std::process::Command;
 
-use file_utils_operations_lib::utils::test_utils::{cmp_vector, convert_string_to_list};
+use file_utils_lib::utils::test_utils::{cmp_vector, convert_string_to_list};
 
 static PATH: &str = "./tests_files/DDHC.txt";
 

@@ -60,7 +60,7 @@ So, why I keep **WithEOL**? \
 
 With **pypi**:
 ```sh
-pip install file-utils-operations
+pip install file-utils
 ```
 
 From source:
@@ -71,7 +71,7 @@ maturin develop
 ### rust
 
 ```sh
-cargo add file_utils_operations
+cargo add file_utils
 ```
 
 ## Before-starting
@@ -118,13 +118,13 @@ With **cat -e test.txt**:
 1\ Simple head (can be change to tail)
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 2 # Number of lines to read
 
 try:
-    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=n)
+    head: list = file_utils_lib.WithEOL.head(path=path, n=n)
     print(head)
 except:
     print("Unable to open/read the file")
@@ -138,13 +138,13 @@ Stdout:
 
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 2 # Number of lines to read
 
 try:
-    tail: list = file_utils_operations_lib.WithEOL.tail(path=path, n=n)
+    tail: list = file_utils_lib.WithEOL.tail(path=path, n=n)
     print(tail)
 except:
     print("Unable to open/read the file")
@@ -158,14 +158,14 @@ Stdout:
 
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n1: int = 2 # First line to read
 n2: int = 4 # Last line to read
 
 try:
-    between: list = file_utils_operations_lib.WithEOL.between(path=path, n1=n1, n2=n2)
+    between: list = file_utils_lib.WithEOL.between(path=path, n1=n1, n2=n2)
     print(between)
 except:
     print("Unable to open/read the file")
@@ -179,12 +179,12 @@ Stdout:
 
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 
 try:
-    parse: list = file_utils_operations_lib.WithEOL.parse(path=path)
+    parse: list = file_utils_lib.WithEOL.parse(path=path)
     print(parse)
 except:
     print("Unable to open/read the file")
@@ -198,12 +198,12 @@ Stdout:
 
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 
 try:
-    count: list = file_utils_operations_lib.WithEOL.count_lines(path=path)
+    count: list = file_utils_lib.WithEOL.count_lines(path=path)
     print(count)
 except:
     print("Unable to open/read the file")
@@ -218,13 +218,13 @@ Stdout:
 With **remove_empty_string** enable: \
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    tail: list = file_utils_operations_lib.WithEOL.tail(path=path, n=n, remove_empty_string=True)
+    tail: list = file_utils_lib.WithEOL.tail(path=path, n=n, remove_empty_string=True)
     print(tail)
 except:
     print("Unable to open/read the file")
@@ -237,13 +237,13 @@ Stdout:
 With **remove_empty_string** disable (default option): \
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    tail: list = file_utils_operations_lib.WithEOL.tail(path=path, n=n, remove_empty_string=False)
+    tail: list = file_utils_lib.WithEOL.tail(path=path, n=n, remove_empty_string=False)
     print(tail)
 except:
     print("Unable to open/read the file")
@@ -257,13 +257,13 @@ Stdout:
 
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=n, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"])
+    head: list = file_utils_lib.WithEOL.head(path=path, n=n, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"])
     print(head)
 except:
     print("Unable to open/read the file")
@@ -279,13 +279,13 @@ Why there is just 3 elements instead of 4? You should look at the **restrict** o
 
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=n, remove_empty_string=False, regex_pass=["\[Warning\]:*", "\[Error\]:*"])
+    head: list = file_utils_lib.WithEOL.head(path=path, n=n, remove_empty_string=False, regex_pass=["\[Warning\]:*", "\[Error\]:*"])
     print(head)
 except:
     print("Unable to open/read the file")
@@ -302,13 +302,13 @@ Why there is just 3 elements instead of 4? You should look at the **restrict** o
 With **restrict** disable: \
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=4, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"], restrict=False)
+    head: list = file_utils_lib.WithEOL.head(path=path, n=4, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"], restrict=False)
     print(head)
 except:
     print("Unable to open/read the file")
@@ -321,13 +321,13 @@ Stdout:
 With **restrict** enbale(default): \
 Code:
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 4 # First line to read
 
 try:
-    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=4, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"], restrict=True)
+    head: list = file_utils_lib.WithEOL.head(path=path, n=4, remove_empty_string=False, regex_keep=["\[Warning\]:*", "\[Error\]:*"], restrict=True)
     print(head)
 except:
     print("Unable to open/read the file")
@@ -344,13 +344,13 @@ Stdout:
 It it like **WithEOL** but with a list of custom delimiter. For example:
 
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 2 # Number of lines to read
 
 try:
-    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=n)
+    head: list = file_utils_lib.WithEOL.head(path=path, n=n)
     print(head)
 except:
     print("Unable to open/read the file")
@@ -363,13 +363,13 @@ Stdout:
 has the same behavious as 
 
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 2 # Number of lines to read
 
 try:
-    head: list = file_utils_operations_lib.WithCustomDelims.head(path=path, n=n, delimiter=['\n])
+    head: list = file_utils_lib.WithCustomDelims.head(path=path, n=n, delimiter=['\n])
     print(head)
 except:
     print("Unable to open/read the file")
@@ -402,12 +402,12 @@ aller éèmaman小六号
 
 We'll have with ";", "\n", "éè", "@", "小六号", "::"
 ```py
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 
 try:
-    parse: list = file_utils_operations_lib.WithCustomDelims.parse(path=path, delimiter=[";", "\n", "éè", "@", "::"])
+    parse: list = file_utils_lib.WithCustomDelims.parse(path=path, delimiter=[";", "\n", "éè", "@", "::"])
     print(parse)
 except:
     print("Unable to open/read the file")
@@ -423,17 +423,17 @@ Stdout
 
 You must import the library with
 ```rs
-use file_utils_operations_lib::with_custom_delims::WithCustomDelims;
+use file_utils_lib::with_custom_delims::WithCustomDelims;
 ```
 or
 ```rs
-use file_utils_operations_lib::with_eol::WithEOL;
+use file_utils_lib::with_eol::WithEOL;
 ```
 
 Then, you can use the same functions as python because there are the same behavious. \
 Example:
 ```rs
-use file_utils_operations_lib::with_custom_delims::WithCustomDelims;
+use file_utils_lib::with_custom_delims::WithCustomDelims;
 
 fn main() {
     let mut delimiters: Vec<String> = Vec::new();
@@ -453,13 +453,13 @@ fn main() {
 ```
 has the same behaviour as
 ```rs
-import file_utils_operations_lib
+import file_utils_lib
 
 path: str = "my_path_to_file"
 n: int = 2 # Number of lines to read
 
 try:
-    head: list = file_utils_operations_lib.WithEOL.head(path=path, n=n)
+    head: list = file_utils_lib.WithEOL.head(path=path, n=n)
     print(head)
 except:
     print("Unable to open/read the file")
@@ -563,7 +563,7 @@ class WithCustomDelims:
 
 ## Rust-Structure
 
-Take a look at [https://docs.rs/file_utils_operations/latest/file_utils_operations_lib/](https://docs.rs/file_utils_operations/latest/file_utils_operations_lib/)
+Take a look at [https://docs.rs/file_utils/latest/file_utils_lib/](https://docs.rs/file_utils/latest/file_utils_lib/)
 
 ## Structure
 
