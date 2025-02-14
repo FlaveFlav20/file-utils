@@ -5,7 +5,6 @@
 - [Intro](#Intro)
 - [Installation](#Installation)
     - [python](#python)
-    - [rust](#rust)
 - [Before starting](#Before-starting)
 - [Arguments-explaination](#Arguments-explaination)
 
@@ -26,10 +25,8 @@ Examples:
     - [How to use it?](#How-to-use-it-python)
     - [What delim can be used?](#What-delim-can-be-used-python)
     - [With more than one delimiter?](#With-more-than-one-delimiter-python)
-- [How to use the rust crate?](#How-to-use-the-rust-crate?)
 
 - [Python class](#Python-class)
-- [Rust Structure](#Rust-Structure)
 - [Structure](#Structure)
 
 ## Intro
@@ -66,12 +63,6 @@ pip install file-utils
 From source:
 ```sh
 maturin develop
-```
-
-### rust
-
-```sh
-cargo add file_utils
 ```
 
 ## Before-starting
@@ -419,52 +410,6 @@ Stdout
 ['', 'À ', 'la ', '', '', 'pêche ', 'aux moules, ', 'moules, ', '', 'moules', "Je n'veux", ' plus ', 'y ', 'aller ', 'maman', '']
 ```
 
-## How-to-use-the-rust-crate?
-
-You must import the library with
-```rs
-use file_utils_lib::with_custom_delims::WithCustomDelims;
-```
-or
-```rs
-use file_utils_lib::with_eol::WithEOL;
-```
-
-Then, you can use the same functions as python because there are the same behavious. \
-Example:
-```rs
-use file_utils_lib::with_custom_delims::WithCustomDelims;
-
-fn main() {
-    let mut delimiters: Vec<String> = Vec::new();
-    delimiters.push("\n".to_string());
-    let n: usize = 10;
-    let res: Vec<String> = WithCustomDelims::head(
-        "my path".to_string(),
-        n,
-        delimiters,
-        false,
-        Vec::new(),
-        Vec::new(),
-        true,
-        1024,
-    );
-}
-```
-has the same behaviour as
-```rs
-import file_utils_lib
-
-path: str = "my_path_to_file"
-n: int = 2 # Number of lines to read
-
-try:
-    head: list = file_utils_lib.WithEOL.head(path=path, n=n)
-    print(head)
-except:
-    print("Unable to open/read the file")
-```
-
 ## Python-class
 
 If we translate the rust into python, we'll have:
@@ -560,10 +505,6 @@ class WithCustomDelims:
                     buffer_size: int = 1024):
         ...
 ```
-
-## Rust-Structure
-
-Take a look at [https://docs.rs/file_utils/latest/file_utils_lib/](https://docs.rs/file_utils/latest/file_utils_lib/)
 
 ## Structure
 
