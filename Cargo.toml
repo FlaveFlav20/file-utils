@@ -10,6 +10,14 @@ keywords = ["head", "tail", "parse", "count_lines", "utf"]
 categories = ["filesystem"]
 exclude = ["tests_files/custom_delim.txt"]
 
+[profile.release]
+opt-level = 3
+overflow-checks = false
+debug = false
+
+[tool.maturin]
+profile = "release"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
 name = "file_utils_lib"
@@ -19,11 +27,3 @@ crate-type = ["cdylib", "rlib"]
 pyo3 = "0.22.0"
 read_utf8 = "0.1.1"
 regex = "1.11.1"
-
-[profile.dev]
-opt-level = 3
-overflow-checks = false
-debug = false
-
-[tool.maturin]
-profile = "release"
