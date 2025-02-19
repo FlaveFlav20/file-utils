@@ -7,6 +7,10 @@ use pyo3::prelude::*;
 use regex::Regex;
 use std::fs::read_to_string;
 
+use std::fs::File;
+use std::io::Write;
+use std::io::prelude::*;
+
 use crate::utils::utils::{check_regex, init_regex, restrict_remove_tail};
 
 #[pyclass]
@@ -265,7 +269,6 @@ impl WithEOL {
         let mut res: usize = 0;
         let re_keep: Vec<Regex> = init_regex(regex_keep);
         let re_pass: Vec<Regex> = init_regex(regex_pass);
-
         for line in read_to_string(path).unwrap().lines() {
             if remove_empty_string && line.to_string().is_empty() {
                 continue;
@@ -278,4 +281,168 @@ impl WithEOL {
         }
         res
     }
+
+    ///
+    /// [WithEOL]\[head_to_file\]: take the first n lines. \
+    /// Arguments:
+    /// - path_from: path to the source file
+    /// - path_dest: path to the destination file
+    /// - n: number of lines
+    /// - remove_empty_string (false by default in python code):: remove all
+    /// string that only contains spaces
+    /// - regex_keep: a list of regex to keep => put Vec::new() if
+    /// you don't want this parameters
+    /// - regex_pass: a list of regex to pass => put Vec::new() if
+    /// you don't want this parameters
+    /// - restrict(true by default in python code): if enable, it will only
+    /// take the first n lines. If not, it will take the first n lines that
+    /// can be taken (you can take a look at the README to have further
+    /// explaination)
+    ///
+    /// Return:
+    /// - A list of string
+    ///
+    #[staticmethod]
+    #[pyo3(signature = (path_from, path_dest, n, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
+    pub fn head_to_file(
+        path_from: String,
+        path_dest: String,
+        n: usize,
+        remove_empty_string: bool,
+        regex_keep: Vec<String>,
+        regex_pass: Vec<String>,
+        restrict: bool,
+    ) -> std::io::Result<()> {
+        let mut len = 0;
+        let mut file_dest = File::create(path_dest)?;
+        let re_keep: Vec<Regex> = init_regex(regex_keep);
+        let re_pass: Vec<Regex> = init_regex(regex_pass);
+
+        let mut count: usize = 0;
+        for line in read_to_string(path_from).unwrap().lines() {
+            count += 1;
+            if remove_empty_string && line.to_string().is_empty() {
+                continue;
+            } else if re_keep.len() > 0 && !check_regex(line, &re_keep) {
+                continue;
+            } else if re_pass.len() > 0 && check_regex(line, &re_pass) {
+                continue;
+            }
+            if restrict && (count - 1) >= n {
+                break;
+            }
+            len+=1;
+            file_dest.write_all(line.as_bytes())?;
+            if len >= n {
+                break;
+            }
+        }
+        Ok(())
+    }
+
+    ///
+    /// [WithEOL]\[between_to_file\]: take the lines between n1 and n2 \
+    /// Arguments:
+    /// - path_from: path to the source file
+    /// - path_dest: path to the destination file
+    /// - n1: the line begin
+    /// - n2: the line end
+    /// - remove_empty_string (false by default in python code):: remove all
+    /// string that only contains spaces
+    /// - regex_keep: a list of regex to keep => put Vec::new() if
+    /// you don't want this parameters
+    /// - regex_pass: a list of regex to pass => put Vec::new() if
+    /// you don't want this parameters
+    /// - restrict(true by default in python code): if enable, it will only
+    /// take the lines between n1 and n2. If not, it will take the lines
+    /// between n1 and n2 that can be taken (you can take a look at the README
+    ///  to have further explaination)
+    ///
+    /// Return:
+    /// - A list of string
+    ///
+    #[staticmethod]
+    #[pyo3(signature = (path_from, path_dest, n1, n2, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new(), restrict=true))]
+    pub fn between_to_file(
+        path_from: String,
+        path_dest: String,
+        n1: usize,
+        n2: usize,
+        remove_empty_string: bool,
+        regex_keep: Vec<String>,
+        regex_pass: Vec<String>,
+        restrict: bool,
+    ) -> std::io::Result<()> {
+        let mut file_dest = File::create(path_dest)?;
+        let re_keep: Vec<Regex> = init_regex(regex_keep);
+        let re_pass: Vec<Regex> = init_regex(regex_pass);
+
+        let mut count_lines: usize = 0;
+        let mut count_elems: usize = 0;
+        for line in read_to_string(path_from).unwrap().lines() {
+            count_lines += 1;
+            if remove_empty_string && line.to_string().is_empty() {
+                continue;
+            } else if re_keep.len() > 0 && !check_regex(line, &re_keep) {
+                continue;
+            } else if re_pass.len() > 0 && check_regex(line, &re_pass) {
+                continue;
+            }
+            count_elems += 1;
+
+            if restrict && count_lines > n2 {
+                break;
+            } else if restrict && count_lines >= n1 {
+                file_dest.write_all(line.as_bytes())?;
+            } else if !restrict && count_elems > n2 {
+                break;
+            } else if !restrict && count_elems >= n1 {
+                file_dest.write_all(line.as_bytes())?;
+            }
+        }
+        Ok(())
+    }
+
+    ///
+    /// [WithEOL]\[parse_to_file\]: take the whole file \
+    /// Arguments:
+    /// - path_from: path to the source file
+    /// - path_dest: path to the destination file
+    /// - remove_empty_string (false by default in python code):: remove all
+    /// string that only contains spaces
+    /// - regex_keep: a list of regex to keep => put Vec::new() if
+    /// you don't want this parameters
+    /// - regex_pass: a list of regex to pass => put Vec::new() if
+    /// you don't want this parameters
+    ///
+    /// Return:
+    /// - A list of string
+    ///
+    #[staticmethod]
+    #[pyo3(signature = (path_from, path_dest, remove_empty_string=false, regex_keep=Vec::new(), regex_pass=Vec::new()))]
+    pub fn parse_to_file(
+        path_from: String,
+        path_dest: String,
+        remove_empty_string: bool,
+        regex_keep: Vec<String>,
+        regex_pass: Vec<String>,
+    ) -> std::io::Result<()> {
+        let mut file_dest = File::create(path_dest)?;
+        let re_keep: Vec<Regex> = init_regex(regex_keep);
+        let re_pass: Vec<Regex> = init_regex(regex_pass);
+
+        for line in read_to_string(path_from).unwrap().lines() {
+            if remove_empty_string && line.to_string().is_empty() {
+                continue;
+            } else if re_keep.len() > 0 && !check_regex(line, &re_keep) {
+                continue;
+            } else if re_pass.len() > 0 && check_regex(line, &re_pass) {
+                continue;
+            }
+            file_dest.write_all(line.as_bytes())?;
+        }
+        Ok(())
+    }
+
+
 }

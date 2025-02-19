@@ -11,5 +11,9 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dynamic = ["version"]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["head", "begin", "tail", "end", "parse", "search", "count_lines", "count", "line", "lines", "utf", "files"]
+
 [tool.maturin]
 features = ["pyo3/extension-module"]
