@@ -9,7 +9,11 @@ use with_eol::WithEOL;
 
 pub mod with_custom_delims;
 
+<<<<<<< HEAD
 ////
+=======
+//// Entry point of python library
+>>>>>>> origin/dev
 #[pymodule]
 fn file_utils_lib(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<WithEOL>()?;

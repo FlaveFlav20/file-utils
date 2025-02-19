@@ -1,5 +1,28 @@
 #!/bin/bash
 
+<<<<<<< HEAD
+=======
+### Check dependencies
+
+python3.12 --version;
+if test $? -ne 0; then
+    echo "Python 3.12 is not installed";
+    exit 1;
+fi;
+
+cargo --version;
+if test $? -ne 0; then
+    echo "cargo not available";
+    exit 1;
+fi;
+
+pip --version;
+if test $? -ne 0; then
+    echo "pip command is not available";
+    exit 1;
+fi;
+
+>>>>>>> origin/dev
 ### Rust tests
 python3.12 tests_files/create_test_custom_delims_file.py;
 if test $? -ne 0; then
@@ -7,9 +30,23 @@ if test $? -ne 0; then
     exit 1;
 fi;
 
+<<<<<<< HEAD
 cargo test;
 if test $? -ne 0; then
     echo "Rust code has a problem";
+=======
+# Check if code works without optimisations
+cargo test --profile test-unopti;
+if test $? -ne 0; then
+    echo "Rust test code without optimisations has a problem";
+    exit 1;
+fi
+
+# Check if code works with optimisations
+cargo test;
+if test $? -ne 0; then
+    echo "Rust test code has a problem";
+>>>>>>> origin/dev
     exit 1;
 fi
 
@@ -23,7 +60,10 @@ if test $? -ne 0; then
     exit 1;
 fi
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/dev
 source env/bin/activate;
 if test $? -ne 0; then
     echo "Unable to activate the python env";
