@@ -10,11 +10,14 @@ keywords = ["head", "tail", "parse", "count_lines", "utf"]
 categories = ["filesystem"]
 exclude = ["tests_files/custom_delim.txt"]
 
+<<<<<<< HEAD
 [profile.release]
 opt-level = 3
 overflow-checks = false
 debug = false
 
+=======
+>>>>>>> origin/dev
 [tool.maturin]
 profile = "release"
 
@@ -27,3 +30,56 @@ crate-type = ["cdylib", "rlib"]
 pyo3 = "0.22.0"
 read_utf8 = "0.1.1"
 regex = "1.11.1"
+
+## All profiles
+# Final release
+[profile.release]
+opt-level = 3
+debug = false
+strip = "none"
+debug-assertions = false
+overflow-checks = false
+lto = true
+incremental = true
+
+# To test by hand without optimisations (use --profile dev)
+[profile.dev]
+opt-level = 0
+debug = true
+strip = "debuginfo"
+debug-assertions = true
+overflow-checks = true
+lto = false
+incremental = true
+
+# To test by hand with optimisations (use --profile devopti)
+[profile.devopti]
+inherits = "dev"
+opt-level = 3
+debug = true
+strip = "debuginfo"
+debug-assertions = true
+overflow-checks = true
+lto = true
+incremental = true
+
+# For cargo test (default: cargo test)
+[profile.test]
+opt-level = 3
+debug = true
+strip = "none"
+debug-assertions = true
+overflow-checks = true
+lto = true
+incremental = true
+
+# For cargo test without optimisations (use cargo test --profile test-unopti)
+[profile.test-unopti]
+inherits = "test"
+opt-level = 0
+debug = true
+strip = "none"
+debug-assertions = true
+overflow-checks = true
+lto = false
+incremental = true
