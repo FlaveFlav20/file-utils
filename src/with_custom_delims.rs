@@ -59,7 +59,7 @@ impl WithCustomDelims {
         let re_pass: Vec<Regex> = init_regex(regex_pass);
 
         let read: ReadUTF8Delims = ReadUTF8Delims::new(path, delimiter, None, Some(buffer_size))
-            .expect("Unable to initialize delimiter");
+            .expect("[file-util][WithCustomDelims][head][readUTF]: Unable to initialize delimiter => check if the destination path is correct/the delimiter is right");
 
         let mut count: usize = 0;
         for line in read.into_iter() {
@@ -119,7 +119,7 @@ impl WithCustomDelims {
     ) -> Vec<String> {
         let mut result: Vec<String> = Vec::new();
         let read: ReadUTF8Delims = ReadUTF8Delims::new(path, delimiter, None, Some(buffer_size))
-            .expect("Unable to initialize delimiter");
+            .expect("[file-util][WithCustomDelims][between][readUTF]: Unable to initialize delimiter => check if the destination path is correct/the delimiter is right");
 
         let re_keep: Vec<Regex> = init_regex(regex_keep);
         let re_pass: Vec<Regex> = init_regex(regex_pass);
@@ -194,7 +194,7 @@ impl WithCustomDelims {
         }
 
         let read: ReadUTF8Delims = ReadUTF8Delims::new(path, delimiter, None, Some(buffer_size))
-            .expect("Unable to initialize delimiter");
+            .expect("[file-util][WithCustomDelims][tail][readUTF]: Unable to initialize delimiter => check if the destination path is correct/the delimiter is right");
 
         let mut count: usize = 0;
         for line in read.into_iter() {
@@ -254,7 +254,7 @@ impl WithCustomDelims {
         let re_pass: Vec<Regex> = init_regex(regex_pass);
 
         let read: ReadUTF8Delims = ReadUTF8Delims::new(path, delimiter, None, Some(buffer_size))
-            .expect("Unable to initialize delimiter");
+            .expect("[file-util][WithCustomDelims][parse][readUTF]: Unable to initialize delimiter => check if the destination path is correct/the delimiter is right");
 
         for line in read.into_iter() {
             if remove_empty_string && line.is_empty() {
@@ -300,7 +300,7 @@ impl WithCustomDelims {
         let re_pass: Vec<Regex> = init_regex(regex_pass);
 
         let read: ReadUTF8Delims = ReadUTF8Delims::new(path, delimiter, None, Some(buffer_size))
-            .expect("Unable to initialize delimiter");
+            .expect("[file-util][WithCustomDelims][count_lines][readUTF]: Unable to initialize delimiter => check if the destination path is correct/the delimiter is right");
         for line in read.into_iter() {
             if remove_empty_string && line.to_string().is_empty() {
                 continue;

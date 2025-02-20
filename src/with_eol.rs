@@ -7,13 +7,9 @@ use pyo3::prelude::*;
 use regex::Regex;
 use std::fs::read_to_string;
 
-<<<<<<< HEAD
-=======
 use std::fs::File;
 use std::io::Write;
-use std::io::prelude::*;
 
->>>>>>> origin/dev
 use crate::utils::utils::{check_regex, init_regex, restrict_remove_tail};
 
 #[pyclass]
@@ -315,9 +311,11 @@ impl WithEOL {
         regex_keep: Vec<String>,
         regex_pass: Vec<String>,
         restrict: bool,
-    ) -> std::io::Result<()> {
+    ) -> () {
         let mut len = 0;
-        let mut file_dest = File::create(path_dest)?;
+        let mut file_dest = File::create(path_dest).expect(
+            "[file-utils][WithEOL][head_to_file]: unable to open/create the destination file.",
+        );
         let re_keep: Vec<Regex> = init_regex(regex_keep);
         let re_pass: Vec<Regex> = init_regex(regex_pass);
 
@@ -334,13 +332,15 @@ impl WithEOL {
             if restrict && (count - 1) >= n {
                 break;
             }
-            len+=1;
-            file_dest.write_all(line.as_bytes())?;
+            len += 1;
+            file_dest.write_all(line.as_bytes()).expect(
+                "[file-utils][WithEOL][head_to_file]: unable to write into the destination file",
+            );
             if len >= n {
                 break;
             }
         }
-        Ok(())
+        ()
     }
 
     ///
@@ -375,8 +375,10 @@ impl WithEOL {
         regex_keep: Vec<String>,
         regex_pass: Vec<String>,
         restrict: bool,
-    ) -> std::io::Result<()> {
-        let mut file_dest = File::create(path_dest)?;
+    ) -> () {
+        let mut file_dest = File::create(path_dest).expect(
+            "[file-utils][WithEOL][between_to_file]: unable to open/create the destination file.",
+        );
         let re_keep: Vec<Regex> = init_regex(regex_keep);
         let re_pass: Vec<Regex> = init_regex(regex_pass);
 
@@ -396,14 +398,14 @@ impl WithEOL {
             if restrict && count_lines > n2 {
                 break;
             } else if restrict && count_lines >= n1 {
-                file_dest.write_all(line.as_bytes())?;
+                file_dest.write_all(line.as_bytes()).expect("[file-utils][WithEOL][between_to_file]: unable to write into the destination file");
             } else if !restrict && count_elems > n2 {
                 break;
             } else if !restrict && count_elems >= n1 {
-                file_dest.write_all(line.as_bytes())?;
+                file_dest.write_all(line.as_bytes()).expect("[file-utils][WithEOL][between_to_file]: unable to write into the destination file");
             }
         }
-        Ok(())
+        ()
     }
 
     ///
@@ -429,8 +431,10 @@ impl WithEOL {
         remove_empty_string: bool,
         regex_keep: Vec<String>,
         regex_pass: Vec<String>,
-    ) -> std::io::Result<()> {
-        let mut file_dest = File::create(path_dest)?;
+    ) -> () {
+        let mut file_dest = File::create(path_dest).expect(
+            "[file-utils][WithEOL][parse_to_file]: unable to open/create the destination file.",
+        );
         let re_keep: Vec<Regex> = init_regex(regex_keep);
         let re_pass: Vec<Regex> = init_regex(regex_pass);
 
@@ -442,10 +446,10 @@ impl WithEOL {
             } else if re_pass.len() > 0 && check_regex(line, &re_pass) {
                 continue;
             }
-            file_dest.write_all(line.as_bytes())?;
+            file_dest.write_all(line.as_bytes()).expect(
+                "[file-utils][WithEOL][parse_to_file]: unable to write into the destination file",
+            );
         }
-        Ok(())
+        ()
     }
-
-
 }

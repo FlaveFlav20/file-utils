@@ -10,11 +10,6 @@ keywords = ["head", "tail", "parse", "count_lines", "utf"]
 categories = ["filesystem"]
 exclude = ["tests_files/custom_delim.txt"]
 
-[profile.release]
-opt-level = 3
-overflow-checks = false
-debug = false
-
 [tool.maturin]
 profile = "release"
 
