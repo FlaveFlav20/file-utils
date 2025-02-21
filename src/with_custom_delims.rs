@@ -495,7 +495,6 @@ impl WithCustomDelims {
         regex_pass: Vec<String>,
         buffer_size: usize,
     ) -> () {
-
         let mut file_dest = File::create(path_dest).expect(
             "[file-utils][WithCustomDelims][parse_to_file]: unable to open/create the destination file.",
         );

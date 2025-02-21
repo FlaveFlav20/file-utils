@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -x -e
+
+### Check dependencies
+python3.12 --version
+cargo --version
+pip --version
+
+### Python tests
+python3.12 -m venv env
+source env/bin/activate
+
+# Create test file for rust and python code
+python tests_files/create_test_custom_delims_file.py
+
+### Rust:
+cargo test --profile test-unopti
+cargo test
+
+# Pythons tests
+pip install maturin && maturin develop;
+
+cd tests_python/;
+# Create the test file
+python custom_files.py
+python tests.py
+cd ..;
+
+set +e +x
