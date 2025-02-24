@@ -24,7 +24,7 @@ pip install maturin && maturin develop;
 cd tests_python/;
 # Create the test file
 python custom_files.py
-python tests.py
 cd ..;
+python tests_python/tests.py
 
 set +e +x
