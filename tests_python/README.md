@@ -14,11 +14,12 @@ python3 -m venv env && source env/bin/activate && pip install maturin && maturin
 ```
 2) You must create test files
 ```sh
-python3 tests_files/create_test_custom_delims_file.py
+python tests_files/create_test_custom_delims_file.py
+cd tests_python/ && python custom_files.py && cd ..
 ```
 3) Then, you should run tests with
 ```sh
-python3 tests_python/tests.py
+ cd tests_python/ && python tests_python/tests.py && cd ..
 ```
 
 ## How to run a single test?
@@ -29,8 +30,15 @@ cd tests_python/WithCustomDelims
 ``
 and run a test like
 ```sh
-python3 tests_between.py
+python tests_between.py
 ```
+Don't forget to 
+
+```sh
+python tests_files/create_test_custom_delims_file.py
+cd tests_python/ && python custom_files.py && cd ..
+```
+You should use an environement.
 
 ## Tests format
 ```sh
