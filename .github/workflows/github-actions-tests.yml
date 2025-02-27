@@ -14,5 +14,5 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
-          bash run-test
+           python3.12 --version && pip --version  && python3.12 -m venv env && source env/bin/activate && python tests_files/create_test_custom_delims_file.py && cargo test --profile test-unopti && cargo test && pip install maturin && maturin develop && cd tests_python/ && python custom_files.py && python tests.py && cd .. && bash run-test
       - run: echo "🍏 This job's status is ${{ job.status }}."
