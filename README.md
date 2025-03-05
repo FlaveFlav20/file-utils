@@ -457,6 +457,26 @@ class WithEOL:
                     regex_pass: list = []):
         ...
 
+    def head_to_file(path_from: str, path_dest: str, n: int, \
+                remove_empty_string: bool = False, \
+                regex_keep: list = [] \
+                regex_pass: list = [] \
+                restrict: bool = True):
+        ...
+
+    def tail_to_file(path_from: str, path_dest: str, n: int, \
+                remove_empty_string: bool = False, \
+                regex_keep: list = [] \
+                regex_pass: list = [] \
+                restrict: bool = True):
+        ...
+
+    def parse_to_file(path_from: str, path_dest: str, \ 
+                remove_empty_string: bool = False \
+                regex_keep: list = [] \
+                regex_pass: list = []):
+        ...
+
 class WithCustomDelims:
     # head: Read the n first lines
     # if n > (numbers of lines in the file) => return the whole file
